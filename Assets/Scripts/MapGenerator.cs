@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unitilities.Tuples;
 
 public class MapGenerator : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class MapGenerator : MonoBehaviour {
 	public Sprite[] sprites;
 	public GameObject tilePrefab;
 	public GameObject character;
+
+	private static float tileHeight = 0, tileWidth = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -26,26 +29,35 @@ public class MapGenerator : MonoBehaviour {
 		}
 
 		// Generate Maze
-		float tileHeight = tilePrefab.transform.localScale.y;
-		float tileWidth = tileHeight; // make it square for now
+		tileHeight = tilePrefab.transform.localScale.y;
+		tileWidth = tileHeight; // make it square for now
 
 		Vector3 charStart = new Vector3(0,0,0);
+		Tuple<int, int> charCoords = new Tuple<int, int> (0, 0);
 
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
-				Vector3 position = new Vector3 (j * tileHeight, i * tileWidth, 0);
+				Vector3 position = PositionFor (i, j);
 
 				GameObject newTile = Instantiate (tilePrefab, position, Quaternion.identity);
 				newTile.GetComponent<SpriteRenderer> ().sprite = sprites [map [i, j]];
 				if(map[i, j] == 2){ // Store portal location
-					charStart = position;
+					charCoords = new Tuple<int, int> (i, j);
 				}
 			}
 		}
 
-		character.transform.position = charStart;
-
+		character.transform.position = PositionFor(charCoords);
+		character.GetComponent<CompletePlayerController> ().gridCoords = charCoords;
 	
+	}
+
+	public static Vector3 PositionFor(Tuple<int, int> tuple, float z = 0) {
+		return PositionFor (tuple.first, tuple.second, z);
+	}
+
+	public static Vector3 PositionFor(int row, int col, float z = 0) {
+		return new Vector3 (col * tileHeight, row * tileWidth, z);
 	}
 	
 	// Update is called once per frame
