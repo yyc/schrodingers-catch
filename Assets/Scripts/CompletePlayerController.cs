@@ -12,6 +12,8 @@ public class CompletePlayerController : MonoBehaviour {
 	private Timekeeper timekeeper;
 	private Hashtable hashtable;
 	public Tuple<int, int> gridCoords;
+	public float cooldown = 0.1f;
+	private float lastPressTime = 0f;
 
 	// Use this for initialization
 	void Start()
@@ -32,19 +34,29 @@ public class CompletePlayerController : MonoBehaviour {
 			timekeeper = Timekeeper.getInstance ();
 		}
 		if (underControl) {
-			//Store the current horizontal input in the float moveHorizontal.
-			int moveHorizontal = Mathf.RoundToInt(Input.GetAxis ("Horizontal"));
+			// only accept input after a cooldown
+			if (timekeeper.getTime() - lastPressTime >= cooldown) {
 
-			//Store the current vertical input in the float moveVertical.
-			int moveVertical = Mathf.RoundToInt(Input.GetAxis ("Vertical"));
+				//Store the current horizontal input in the float moveHorizontal.
+				int moveHorizontal = Mathf.RoundToInt(Input.GetAxis ("Horizontal"));
 
-			if (moveHorizontal != 0) {
-				gridCoords = new Tuple<int, int> (gridCoords.first, gridCoords.second + moveHorizontal);
-			} else if (moveVertical != 0) {
-				gridCoords = new Tuple<int, int> (gridCoords.first + moveVertical, gridCoords.second);
+				//Store the current vertical input in the float moveVertical.
+				int moveVertical = Mathf.RoundToInt(Input.GetAxis ("Vertical"));
+
+				if (moveHorizontal != 0) {
+					lastPressTime = timekeeper.getTime ();
+					gridCoords = new Tuple<int, int> (gridCoords.first, gridCoords.second + moveHorizontal);
+				} else if (moveVertical != 0) {
+					lastPressTime = timekeeper.getTime ();
+					gridCoords = new Tuple<int, int> (gridCoords.first + moveVertical, gridCoords.second);
+				}
+
 			}
 
+
+
 			hashtable.Add (timekeeper.getTime (), gridCoords);
+
 
 			//move to appropriate coordinate
 
