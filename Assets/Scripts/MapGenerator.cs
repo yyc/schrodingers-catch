@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour {
 		tileHeight = tilePrefab.transform.localScale.y;
 		tileWidth = tileHeight; // make it square for now
 
-		Tuple3<int, int, int> charCoords = new Tuple3<int, int, int> (0, 0,0);
+		Tuple3I charCoords = new Tuple3I (0, 0,0);
 
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
@@ -41,22 +41,22 @@ public class MapGenerator : MonoBehaviour {
 				GameObject newTile = Instantiate (tilePrefab, position, Quaternion.identity);
 				newTile.GetComponent<SpriteRenderer> ().sprite = sprites [map [i, j]];
 				if(map[i, j] == 2){ // Store portal location
-					charCoords = new Tuple3<int, int, int> (i, j, 0);
+					charCoords = new Tuple3I (i, j, 0);
 				}
 			}
 		}
 
 		character.transform.position = PositionFor(charCoords);
-		character.GetComponent<CompletePlayerController> ().storedPosition = charCoords;
+		character.GetComponent<MemoryComponent> ().position = charCoords;
 	
 	}
 
-	public static Vector3 PositionFor(Tuple3<int, int, int> tuple, float z = 0) {
+	public static Vector3 PositionFor(Tuple3I tuple, float z = 0) {
 		return PositionFor (tuple.first, tuple.second, z);
 	}
 
 
-	public static Vector3 PositionFor(Tuple<int, int> tuple, float z = 0) {
+	public static Vector3 PositionFor(TupleI tuple, float z = 0) {
 		return PositionFor (tuple.first, tuple.second, z);
 	}
 

@@ -24,10 +24,11 @@ public class Timekeeper: MonoBehaviour
 	}
 
 	public float time = 0;
+	public int tick = 0;
 	private bool isRewinding = false;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		instance = this;
 		time = 0;
@@ -40,12 +41,19 @@ public class Timekeeper: MonoBehaviour
 			time += Time.deltaTime;
 		}
 
+		// FP operations are faster if it's a power of 2
+		// ....maybe
+		tick = Mathf.RoundToInt (time * 16); 
 		timerText.text = time.ToString ();
 	}
 
 	public float getTime ()
 	{
 		return time;
+	}
+
+	public float getTick() {
+		return tick;
 	}
 
 	public void startRewind ()
