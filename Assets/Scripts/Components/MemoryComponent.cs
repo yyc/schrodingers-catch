@@ -13,7 +13,6 @@ public class MemoryComponent : MonoBehaviour {
 
   // Use this for initialization
   void Start() {
-    position  = Tuple3I.zero;
     hashtable = new Hashtable();
   }
 

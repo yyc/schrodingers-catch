@@ -20,7 +20,7 @@ public class MemorySystem : MonoBehaviour {
 
     if (memComponent.hashtable.ContainsKey(tick)) {
       memComponent.memory = (Memory)memComponent.hashtable[tick];
-    } else {
+    } else if (memComponent.memory != null) {
       memComponent.hashtable[tick] = memComponent.memory;
     }
   }

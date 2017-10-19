@@ -65,8 +65,8 @@ public class Timekeeper : MonoBehaviour {
     isRewinding = false;
   }
 
-  public void immediateRewind(float amount)
+  public void immediateOffset(float amount)
   {
-    time -= amount;
+    time += amount;
   }
 }

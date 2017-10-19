@@ -12,6 +12,7 @@ public class PlayerControllerSystem : MonoBehaviour {
   public GameObject currentPlayer;
   public float cooldown = 0.1f;
   public State state    = State.walking;
+  public GameObject playerPrefab;
 
 
   private Timekeeper timekeeper;
@@ -36,7 +37,7 @@ public class PlayerControllerSystem : MonoBehaviour {
 
   // FixedUpdate is called at a fixed interval and is independent of frame rate.
   // Put physics code here.
-  void FixedUpdate()
+  void Update()
   {
     if (timekeeper == null) {
       timekeeper = Timekeeper.getInstance();
@@ -47,18 +48,26 @@ public class PlayerControllerSystem : MonoBehaviour {
     }
 
     // only accept input after a cooldown
-    if (timekeeper.getTime() - lastPressTime < cooldown) {
-      return;
-    }
+
+    bool travel = Input.GetKeyUp("space");
 
     switch (state) {
     case State.walking:
+
+      if (travel) {
+        startTraveling();
+      }
+
+      if (timekeeper.getTime() - lastPressTime < cooldown) {
+        return;
+      }
 
       // Store the current horizontal input in the float moveHorizontal.
       int moveHorizontal = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
 
       // Store the current vertical input in the float moveVertical.
       int moveVertical = Mathf.RoundToInt(Input.GetAxis("Vertical"));
+
 
       if (moveHorizontal != 0) {
         lastPressTime = timekeeper.getTime();
@@ -77,9 +86,41 @@ public class PlayerControllerSystem : MonoBehaviour {
 
     case State.traveling:
 
+      if (travel) {
+        startWalking();
+      }
+
+      // Store the current horizontal input in the float moveHorizontal.
+      float moveTime = Input.GetAxis("Horizontal");
+
+      if (moveTime != 0) {
+        lastPressTime = timekeeper.getTime();
+        timekeeper.immediateOffset(0.1f * moveTime);
+      }
 
       break;
     }
+  }
+
+  void startTraveling() {
+    memComponent.isSaving = false;
+
+    GameObject newPlayer = Instantiate(currentPlayer);
+
+    MemoryComponent newMemoryComponent =
+      newPlayer.GetComponent<MemoryComponent> ();
+
+    currentPlayer = newPlayer;
+    memComponent  = newMemoryComponent;
+
+    state = State.traveling;
+    timekeeper.startRewind();
+  }
+
+  void startWalking() {
+    memComponent.isSaving = true;
+    state                 = State.walking;
+    timekeeper.stopRewind();
   }
 
   // OnTriggerEnter2D is called whenever this object overlaps with a trigger
