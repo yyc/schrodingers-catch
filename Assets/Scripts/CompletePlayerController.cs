@@ -8,10 +8,8 @@ public class CompletePlayerController : MonoBehaviour {
 	public float speed;				//Floating point variable to store the player's movement speed.
 	public bool underControl = true;
 	private Rigidbody2D rb2d;		//Store a reference to the Rigidbody2D component required to use 2D Physics.
-	private int count;				//Integer to store the number of pickups collected so far.
 	private Timekeeper timekeeper;
-	private Hashtable hashtable;
-	public Tuple<int, int> gridCoords;
+	private MemoryComponent memComponent;
 	public float cooldown = 0.1f;
 	private float lastPressTime = 0f;
 
@@ -20,11 +18,11 @@ public class CompletePlayerController : MonoBehaviour {
 	{
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
 		rb2d = GetComponent<Rigidbody2D> ();
+		memComponent = GetComponent<MemoryComponent> ();
+
 	}
 
 	void Awake(){
-		hashtable = new Hashtable (new FloatHash ());
-		print (hashtable);
 	}
 
 	//FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
@@ -33,40 +31,31 @@ public class CompletePlayerController : MonoBehaviour {
 		if (timekeeper == null) {
 			timekeeper = Timekeeper.getInstance ();
 		}
-		if (underControl) {
-			// only accept input after a cooldown
-			if (timekeeper.getTime() - lastPressTime >= cooldown) {
+		if (!underControl) {
+			return;
+		}
+		// only accept input after a cooldown
+		if (timekeeper.getTime() - lastPressTime >= cooldown) {
 
-				//Store the current horizontal input in the float moveHorizontal.
-				int moveHorizontal = Mathf.RoundToInt(Input.GetAxis ("Horizontal"));
+			//Store the current horizontal input in the float moveHorizontal.
+			int moveHorizontal = Mathf.RoundToInt(Input.GetAxis ("Horizontal"));
 
-				//Store the current vertical input in the float moveVertical.
-				int moveVertical = Mathf.RoundToInt(Input.GetAxis ("Vertical"));
+			//Store the current vertical input in the float moveVertical.
+			int moveVertical = Mathf.RoundToInt(Input.GetAxis ("Vertical"));
 
-				if (moveHorizontal != 0) {
-					lastPressTime = timekeeper.getTime ();
-					gridCoords = new Tuple<int, int> (gridCoords.first, gridCoords.second + moveHorizontal);
-				} else if (moveVertical != 0) {
-					lastPressTime = timekeeper.getTime ();
-					gridCoords = new Tuple<int, int> (gridCoords.first + moveVertical, gridCoords.second);
-				}
+			if (moveHorizontal != 0) {
+				lastPressTime = timekeeper.getTime ();
+				// direction = 1 if right (moveHorizontal  =1)
+				// direction = 3 if left (moveHorizontal = -1)
+				memComponent.deltaPosition(0, moveHorizontal, 1 - moveHorizontal);
 
-			}
-
-
-
-			hashtable.Add (timekeeper.getTime (), gridCoords);
-
-
-			//move to appropriate coordinate
-
-
-		} else {
-			if (hashtable.ContainsKey (timekeeper.getTime ())) {
-				gridCoords = (Tuple<int, int>) hashtable [timekeeper.getTime ()];
+			} else if (moveVertical != 0) {
+				lastPressTime = timekeeper.getTime ();
+				// direction = 2 if up (moveVertical  =1)
+				// direction = 4 if down (moveVertical = -1)
+				memComponent.deltaPosition(moveVertical, 0, 2 - moveVertical);
 			}
 		}
-		transform.position = MapGenerator.PositionFor (gridCoords, -1);
 	}
 
 	//OnTriggerEnter2D is called whenever this object overlaps with a trigger collider.

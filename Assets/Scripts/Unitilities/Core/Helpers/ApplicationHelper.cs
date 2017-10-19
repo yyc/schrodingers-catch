@@ -28,18 +28,15 @@ namespace Unitilities
         {
             get
             {
-                return Application.platform == RuntimePlatform.WindowsPlayer ||
-                   Application.platform == RuntimePlatform.LinuxPlayer ||
-                   Application.platform == RuntimePlatform.OSXPlayer ||
+				return Application.platform == RuntimePlatform.WindowsPlayer ||
+				Application.platform == RuntimePlatform.LinuxPlayer ||
+				Application.platform == RuntimePlatform.OSXPlayer ||
 
                     #if UNITY_5
                         Application.platform == RuntimePlatform.WSAPlayerX86 ||
                         Application.platform == RuntimePlatform.WSAPlayerX64;
-                    #else
-                        Application.platform == RuntimePlatform.MetroPlayerX86||
-                        Application.platform == RuntimePlatform.MetroPlayerX64;
                     #endif
-
+				false;
             }
         }
 
@@ -58,11 +55,11 @@ namespace Unitilities
         {
             get
             {
-                return Application.platform == RuntimePlatform.WindowsWebPlayer ||
+				return 
                         #if UNITY_5
-                         Application.platform == RuntimePlatform.WebGLPlayer ||
-                        #endif
-                    Application.platform == RuntimePlatform.OSXWebPlayer;
+					Application.platform == RuntimePlatform.WebGLPlayer||
+						#endif
+					false;
             }
         }
 
@@ -72,13 +69,11 @@ namespace Unitilities
             {
                 return Application.platform == RuntimePlatform.Android ||
                        Application.platform == RuntimePlatform.IPhonePlayer ||
-                       Application.platform == RuntimePlatform.BlackBerryPlayer ||
-                       Application.platform == RuntimePlatform.WP8Player ||
                        
                        #if UNITY_5
                         Application.platform == RuntimePlatform.WSAPlayerARM;
-                       #else
-                        Application.platform == RuntimePlatform.MetroPlayerARM;
+						#else
+					false;
                        #endif
             }
         }
