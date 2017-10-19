@@ -33,6 +33,9 @@ public class MemoryComponent : MonoBehaviour {
 	}
 
 	public void deltaPosition(int firstDelta, int secondDelta, int thirdValue) {
+		// Check for validity of new position here
+
+		MapGenerator.
 		position = new Tuple3I (
 			position.first + firstDelta,
 			position.second + secondDelta,
