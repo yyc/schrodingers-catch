@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 5567374}
   - component: {fileID: 5567373}
   - component: {fileID: 5567375}
-  - component: {fileID: 5567376}
   - component: {fileID: 5567379}
   - component: {fileID: 5567378}
   - component: {fileID: 5567377}
@@ -204,20 +203,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5567376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 5567372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5480c360aa8c344fd89c257cc751b676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  underControl: 1
-  cooldown: 0.1
 --- !u!114 &5567377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,8 +526,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1913148767}
   - component: {fileID: 1913148766}
+  - component: {fileID: 1913148768}
   m_Layer: 0
-  m_Name: Timekeeper
+  m_Name: Systems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,6 +561,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1913148768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1913148765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5480c360aa8c344fd89c257cc751b676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  underControl: 1
+  currentPlayer: {fileID: 0}
+  cooldown: 0.1
+  state: 0
 --- !u!1 &1951499732
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,24 +3,33 @@ using System.Collections;
 using AssemblyCSharp;
 using Unitilities.Tuples;
 
-public class CompletePlayerController : MonoBehaviour {
-  public float speed;       // Floating point variable to store the player's
-                            // movement speed.
+public class PlayerControllerSystem : MonoBehaviour {
+  public float speed; // Floating point variable to store the player's
+                      // movement speed.
   public bool underControl = true;
-  private Rigidbody2D rb2d; // Store a reference to the Rigidbody2D component
-                            // required to use 2D Physics.
+
+  // Stores the current player, changes when a new one is spawned
+  public GameObject currentPlayer;
+  public float cooldown = 0.1f;
+  public State state    = State.walking;
+
+
   private Timekeeper timekeeper;
   private MemoryComponent memComponent;
-  public float cooldown       = 0.1f;
   private float lastPressTime = 0f;
+
+
+  public enum State {
+    walking,
+    traveling
+  }
 
   // Use this for initialization
   void Start()
   {
     // Get and store a reference to the Rigidbody2D component so that we can
     // access it.
-    rb2d         = GetComponent<Rigidbody2D> ();
-    memComponent = GetComponent<MemoryComponent> ();
+    memComponent = currentPlayer.GetComponent<MemoryComponent> ();
   }
 
   void Awake() {}
@@ -38,7 +47,13 @@ public class CompletePlayerController : MonoBehaviour {
     }
 
     // only accept input after a cooldown
-    if (timekeeper.getTime() - lastPressTime >= cooldown) {
+    if (timekeeper.getTime() - lastPressTime < cooldown) {
+      return;
+    }
+
+    switch (state) {
+    case State.walking:
+
       // Store the current horizontal input in the float moveHorizontal.
       int moveHorizontal = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
 
@@ -58,6 +73,12 @@ public class CompletePlayerController : MonoBehaviour {
         // direction = 4 if down (moveVertical = -1)
         memComponent.deltaPosition(moveVertical, 0, 2 - moveVertical);
       }
+      break;
+
+    case State.traveling:
+
+
+      break;
     }
   }
 
