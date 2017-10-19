@@ -21,6 +21,5 @@ public class MovementSystem : MonoBehaviour {
 	void FixedUpdate () {
 		transform.position = MapGenerator.PositionFor (memComponent.position, -1);
 		transform.rotation = directions [memComponent.position.third];
-
 	}
 }

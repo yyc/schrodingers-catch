@@ -119,6 +119,9 @@ GameObject:
   - component: {fileID: 5567373}
   - component: {fileID: 5567375}
   - component: {fileID: 5567376}
+  - component: {fileID: 5567379}
+  - component: {fileID: 5567378}
+  - component: {fileID: 5567377}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -214,6 +217,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   underControl: 1
+  cooldown: 0.1
+--- !u!114 &5567377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5567372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4023a1af8bce4fffbcf828c93caff5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5567378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5567372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbee77ccd19554f808c58555bdf7ed28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5567379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5567372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382ec32e6c6f8488c81d9c04b529905d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position:
+    first: 0
+    second: 0
+    third: 0
+  isSaving: 1
 --- !u!1 &443229449
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1164382150}
   time: 0
+  tick: 0
 --- !u!4 &1913148767
 Transform:
   m_ObjectHideFlags: 0
