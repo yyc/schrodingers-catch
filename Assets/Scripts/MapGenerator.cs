@@ -9,6 +9,7 @@ public class MapGenerator : MonoBehaviour {
   public Sprite[] sprites;
   public GameObject tilePrefab;
   public GameObject character;
+  public static string maze_filename = "maze.csv";
 
   private static float tileHeight = 0, tileWidth = 0;
 
@@ -64,5 +65,12 @@ public class MapGenerator : MonoBehaviour {
 
   public static Vector3 PositionFor(int row, int col, float z = 0) {
     return new Vector3(col * tileHeight, row * tileWidth, z);
+  }
+
+  public static bool isValidPosition(Tuple3I position) {
+    if (map[position.first, position.second] == 1) {
+      return false;
+    }
+    return true;
   }
 }
