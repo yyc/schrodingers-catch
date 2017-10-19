@@ -16,8 +16,11 @@ public class MemorySystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (memComponent.hashtable.ContainsKey (Timekeeper.getInstance ().getTime ())) {
-			memComponent.memory = (Memory) memComponent.hashtable [Timekeeper.getInstance ().getTime ()];
+		int tick = Timekeeper.getInstance ().getTick ();
+		if (memComponent.hashtable.ContainsKey (tick)) {
+			memComponent.memory = (Memory) memComponent.hashtable [tick];
+		} else {
+			memComponent.hashtable[tick] = memComponent.memory;
 		}
 	}
 }

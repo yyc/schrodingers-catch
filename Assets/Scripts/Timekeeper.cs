@@ -52,7 +52,7 @@ public class Timekeeper: MonoBehaviour
 		return time;
 	}
 
-	public float getTick() {
+	public int getTick() {
 		return tick;
 	}
 
