@@ -68,6 +68,13 @@ public class MapGenerator : MonoBehaviour {
   }
 
   public static bool isValidPosition(Tuple3I position) {
+    // if it's out of bounds
+    if ((position.first < 0) || (position.first >= map.GetLength(0)) ||
+        (position.second < 0) || (position.second >= map.GetLength(1))) {
+      return false;
+    }
+
+    // wall
     if (map[position.first, position.second] == 1) {
       return false;
     }
