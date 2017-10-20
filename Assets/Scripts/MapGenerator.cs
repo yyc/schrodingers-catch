@@ -42,13 +42,11 @@ public class MapGenerator : MonoBehaviour {
 
     for (int i = 0; i < numRows; i++) {
       for (int j = 0; j < numCols; j++) {
-        Vector3 position = PositionFor(i, j);
+        Vector3 position = TilePositionFor(i, j);
 
         GameObject newTile =
-          Instantiate(tilePrefab, position, Quaternion.identity);
+          Instantiate(tilePrefab, position, Quaternion.identity, transform);
         newTile.GetComponent<SpriteRenderer> ().sprite = sprites[map[i, j]];
-
-        newTile.transform.parent = transform;
 
         if (map[i, j] == 2) { // Store portal location
           charCoords = new Tuple3I(i, j, 0);
@@ -58,6 +56,10 @@ public class MapGenerator : MonoBehaviour {
 
     character.transform.position                        = PositionFor(charCoords);
     character.GetComponent<MemoryComponent> ().position = charCoords;
+  }
+
+  private Vector3 TilePositionFor(int row, int col, float z = 0) {
+    return mapOrigin + new Vector3(col * tileHeight, row * tileWidth, z);
   }
 
   public static Vector3 PositionFor(Tuple3I tuple, float z = 0) {
