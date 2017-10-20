@@ -115,6 +115,7 @@ public class PlayerControllerSystem : MonoBehaviour {
 
     state = State.traveling;
     timekeeper.startRewind();
+    underControl = false;
   }
 
   void startWalking() {
