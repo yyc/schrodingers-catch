@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour {
   public GameObject character;
   public static string maze_filename = "maze.csv";
 
-  private static float tileHeight = 0, tileWidth = 0;
+  private static float tileHeight = 0, tileWidth = 0, tileScale = 0;
   private static Vector3 mapOrigin = Vector3.zero;
 
   // Use this for initialization
@@ -35,8 +35,14 @@ public class MapGenerator : MonoBehaviour {
     }
 
     // Generate Maze
-    tileHeight = tilePrefab.transform.localScale.y;
+    tileHeight = tilePrefab.GetComponent<BoxCollider2D>().size.y;
     tileWidth  = tileHeight; // make it square for now
+    tileScale  = GetComponent<BoxCollider2D>().size.y /
+                 (tileHeight * numRows);
+    tileHeight *= tileScale;
+    tileWidth  *= tileScale;
+
+    tilePrefab.transform.localScale = new Vector3(tileScale, tileScale, 1);
 
     Tuple3I charCoords = new Tuple3I(0, 0, 0);
 
@@ -47,6 +53,8 @@ public class MapGenerator : MonoBehaviour {
         GameObject newTile =
           Instantiate(tilePrefab, position, Quaternion.identity, transform);
         newTile.GetComponent<SpriteRenderer> ().sprite = sprites[map[i, j]];
+
+        tilePrefab.transform.localScale = new Vector3(tileScale, tileScale, 1);
 
         if (map[i, j] == 2) { // Store portal location
           charCoords = new Tuple3I(i, j, 0);
