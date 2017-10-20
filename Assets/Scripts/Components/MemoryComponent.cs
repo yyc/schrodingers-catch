@@ -6,7 +6,7 @@ using Unitilities.Tuples;
 public class MemoryComponent : MonoBehaviour {
   public Tuple3I position;
   public Memory.MemoryEvent state;
-  public float transitionProgress = 0;
+  public float progress = 0;
   public Memory memory;
   public Hashtable hashtable;
 
@@ -25,7 +25,7 @@ public class MemoryComponent : MonoBehaviour {
       if (state == Memory.MemoryEvent.reposition) {
         memory = new Memory(Memory.MemoryEvent.reposition, position);
       } else {
-        memory = new Memory(state, transitionProgress);
+        memory = new Memory(state, progress);
       }
       return;
     }
@@ -37,7 +37,7 @@ public class MemoryComponent : MonoBehaviour {
     if (memory.memoryEvent() == Memory.MemoryEvent.reposition) {
       position = memory.position();
     } else {
-      transitionProgress = memory.progress();
+      progress = memory.progress();
     }
   }
 

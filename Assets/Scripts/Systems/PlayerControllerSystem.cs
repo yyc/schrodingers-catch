@@ -10,8 +10,9 @@ public class PlayerControllerSystem : MonoBehaviour {
 
   // Stores the current player, changes when a new one is spawned
   public GameObject currentPlayer;
-  public float cooldown = 0.1f;
-  public State state    = State.walking;
+  public float cooldown       = 0.1f;
+  public float transitionTime = 0.2f;
+  public State state          = State.walking;
   public GameObject playerPrefab;
 
 
@@ -22,6 +23,7 @@ public class PlayerControllerSystem : MonoBehaviour {
 
   public enum State {
     walking,
+    transitioning,
     traveling
   }
 
@@ -55,6 +57,7 @@ public class PlayerControllerSystem : MonoBehaviour {
     case State.walking:
 
       if (travel) {
+        lastPressTime = timekeeper.getTime();
         startTraveling();
       }
 
@@ -85,13 +88,16 @@ public class PlayerControllerSystem : MonoBehaviour {
       break;
 
     case State.traveling:
+      Debug.Log("Traveling");
 
       if (travel) {
-        startWalking();
+        lastPressTime = timekeeper.getTime();
+        willStartWalking();
       }
 
       // Store the current horizontal input in the float moveHorizontal.
       float moveTime = Input.GetAxis("Horizontal");
+      Debug.Log(moveTime);
 
       if (moveTime != 0) {
         lastPressTime = timekeeper.getTime();
@@ -99,12 +105,47 @@ public class PlayerControllerSystem : MonoBehaviour {
       }
 
       break;
+
+    // Handle transitions
+    case State.transitioning:
+      float deltaTime = timekeeper.getTime() - lastPressTime;
+      memComponent.progress = deltaTime / transitionTime;
+
+      if (memComponent.progress < 1) {
+        return;
+      }
+
+      // Finished transition
+      if (memComponent.state == Memory.MemoryEvent.appearing) {
+        startWalking();
+        return;
+      } else if (memComponent.state == Memory.MemoryEvent.disappearing) {
+        startTraveling();
+        return;
+      } else {
+        Debug.Log("Invalid state in PlayerControllerSystem");
+      }
+      break;
     }
+  }
+
+  void willStartTraveling() {
+    state                 = State.transitioning;
+    memComponent.progress = 0;
+    memComponent.state    = Memory.MemoryEvent.disappearing;
+    currentPlayer.GetComponent<MovementSystem>().startTransition(transitionTime);
+  }
+
+  void willStartWalking() {
+    state                 = State.transitioning;
+    memComponent.state    = Memory.MemoryEvent.appearing;
+    memComponent.progress = 0.1f;
+    currentPlayer.GetComponent<MovementSystem>().startTransition(transitionTime);
   }
 
   void startTraveling() {
     memComponent.isSaving = false;
-
+    memComponent.state    = Memory.MemoryEvent.reposition;
     GameObject newPlayer = Instantiate(currentPlayer);
 
     MemoryComponent newMemoryComponent =
@@ -113,13 +154,16 @@ public class PlayerControllerSystem : MonoBehaviour {
     currentPlayer = newPlayer;
     memComponent  = newMemoryComponent;
 
+    memComponent.state    = Memory.MemoryEvent.appearing;
+    memComponent.progress = 0.1f;
+
     state = State.traveling;
     timekeeper.startRewind();
-    underControl = false;
   }
 
   void startWalking() {
     memComponent.isSaving = true;
+    memComponent.state    = Memory.MemoryEvent.reposition;
     state                 = State.walking;
     timekeeper.stopRewind();
   }

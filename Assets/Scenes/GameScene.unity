@@ -516,6 +516,7 @@ MonoBehaviour:
   underControl: 1
   currentPlayer: {fileID: 5567372}
   cooldown: 0.1
+  transitionTime: 0.2
   state: 0
   playerPrefab: {fileID: 1703424125306958, guid: d72f04a75ee644604972ade0d007beda,
     type: 2}
@@ -665,6 +666,11 @@ Prefab:
     - target: {fileID: 4748753806760952, guid: d72f04a75ee644604972ade0d007beda, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212857290901012134, guid: d72f04a75ee644604972ade0d007beda,
+        type: 2}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d72f04a75ee644604972ade0d007beda, type: 2}
