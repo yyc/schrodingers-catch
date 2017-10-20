@@ -48,6 +48,8 @@ public class MapGenerator : MonoBehaviour {
           Instantiate(tilePrefab, position, Quaternion.identity);
         newTile.GetComponent<SpriteRenderer> ().sprite = sprites[map[i, j]];
 
+        newTile.transform.parent = transform;
+
         if (map[i, j] == 2) { // Store portal location
           charCoords = new Tuple3I(i, j, 0);
         }
