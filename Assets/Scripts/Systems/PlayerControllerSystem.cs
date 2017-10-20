@@ -58,7 +58,7 @@ public class PlayerControllerSystem : MonoBehaviour {
 
       if (travel) {
         lastPressTime = timekeeper.getTime();
-        startTraveling();
+        willStartTraveling();
       }
 
       if (timekeeper.getTime() - lastPressTime < cooldown) {
@@ -88,7 +88,6 @@ public class PlayerControllerSystem : MonoBehaviour {
       break;
 
     case State.traveling:
-      Debug.Log("Traveling");
 
       if (travel) {
         lastPressTime = timekeeper.getTime();
@@ -97,7 +96,6 @@ public class PlayerControllerSystem : MonoBehaviour {
 
       // Store the current horizontal input in the float moveHorizontal.
       float moveTime = Input.GetAxis("Horizontal");
-      Debug.Log(moveTime);
 
       if (moveTime != 0) {
         lastPressTime = timekeeper.getTime();
@@ -141,6 +139,7 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.state    = Memory.MemoryEvent.appearing;
     memComponent.progress = 0.1f;
     currentPlayer.GetComponent<MovementSystem>().startTransition(transitionTime);
+    timekeeper.stopRewind();
   }
 
   void startTraveling() {
@@ -165,7 +164,6 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.isSaving = true;
     memComponent.state    = Memory.MemoryEvent.reposition;
     state                 = State.walking;
-    timekeeper.stopRewind();
   }
 
   // OnTriggerEnter2D is called whenever this object overlaps with a trigger
