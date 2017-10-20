@@ -12,9 +12,12 @@ public class MapGenerator : MonoBehaviour {
   public static string maze_filename = "maze.csv";
 
   private static float tileHeight = 0, tileWidth = 0;
+  private static Vector3 mapOrigin = Vector3.zero;
 
   // Use this for initialization
   void Start() {
+    mapOrigin = transform.position;
+
     // Read in maze
     string fileData = System.IO.File.ReadAllText("maze.csv");
 
@@ -64,7 +67,7 @@ public class MapGenerator : MonoBehaviour {
   }
 
   public static Vector3 PositionFor(int row, int col, float z = 0) {
-    return new Vector3(col * tileHeight, row * tileWidth, z);
+    return mapOrigin + new Vector3(col * tileHeight, row * tileWidth, z);
   }
 
   public static bool isValidPosition(Tuple3I position) {
