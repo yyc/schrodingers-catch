@@ -5,15 +5,22 @@ using Unitilities.Tuples;
 
 public class Memory : Tuple<int, Tuple3I>{
   public enum MemoryEvent {
-    reposition,
-    appear,
-    disappear
+    reposition,   // tuple holds new (x,y,orientation)
+    appearing,    // tuple holds only (animationProgress, null, null)
+    disappearing, // tuple holds (progress, null, null)
   };
 
   public Memory(MemoryEvent memEvent, int row, int col, int orientation) :
     base(
       (int)memEvent,
       new Tuple3I(row, col, orientation)
+      )
+  {}
+
+  public Memory(MemoryEvent memEvent, float progress) :
+    base(
+      (int)memEvent,
+      new Tuple3I(Mathf.RoundToInt(progress * 100), 0, 0)
       )
   {}
 
@@ -29,5 +36,9 @@ public class Memory : Tuple<int, Tuple3I>{
 
   public Tuple3I position() {
     return this.second;
+  }
+
+  public float progress() {
+    return ((float)this.second.first) / 100;
   }
 }

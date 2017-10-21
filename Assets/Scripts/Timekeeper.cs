@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class Timekeeper : MonoBehaviour {
   static Timekeeper instance;
   public Text timerText;
+  readonly public float tickRatio = 16; // Ticks per second
 
   // Store a reference to the UI Text component which will display the timer
 
@@ -42,7 +43,7 @@ public class Timekeeper : MonoBehaviour {
 
     // FP operations are faster if it's a power of 2
     // ....maybe
-    tick           = Mathf.RoundToInt(time * 16);
+    tick           = Mathf.FloorToInt(time * 16);
     timerText.text = time.ToString();
   }
 
