@@ -33,8 +33,9 @@ public class MemoryComponent : MonoBehaviour {
     if (memory == null) {
       return;
     }
+    state = memory.memoryEvent();
 
-    if (memory.memoryEvent() == Memory.MemoryEvent.reposition) {
+    if (state == Memory.MemoryEvent.reposition) {
       position = memory.position();
     } else {
       progress = memory.progress();
