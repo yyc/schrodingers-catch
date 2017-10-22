@@ -149,4 +149,12 @@ public class MapGenerator : MonoBehaviour {
       index++;
     }
   }
+
+  public static int GetPathValueFor(Tuple3I position) {
+    return GetPathValueFor(position.first, position.second);
+  }
+
+  public static int GetPathValueFor(int row, int col) {
+    return pathMap[row, col];
+  }
 }

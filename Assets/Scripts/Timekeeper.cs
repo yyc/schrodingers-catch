@@ -56,6 +56,10 @@ public class Timekeeper : MonoBehaviour {
     return tick;
   }
 
+  public int GetTickIn(float offset) {
+    return Mathf.FloorToInt((time + offset) * 16);
+  }
+
   public void startRewind()
   {
     isRewinding = true;
