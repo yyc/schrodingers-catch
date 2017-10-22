@@ -5,11 +5,13 @@ using UnityEngine;
 using Unitilities.Tuples;
 
 public class MapGenerator : MonoBehaviour {
-  private static int[,] map;
+  private static int[,] map, pathMap;
   public Sprite[] sprites;
   public GameObject tilePrefab;
   public GameObject character;
-  public static string maze_filename = "maze.csv";
+  public static string maze_filename        = "maze.csv";
+  public static List<TupleI>portalLocations = new List<TupleI>();
+
 
   private static float tileHeight = 0, tileWidth = 0, tileScale = 0;
   private static Vector3 mapOrigin = Vector3.zero;
@@ -24,7 +26,8 @@ public class MapGenerator : MonoBehaviour {
     string[] rows = fileData.Split("\n"[0]);
     string[] cols = rows[0].Split(","[0]);
     int numRows = rows.Length, numCols = cols.Length;
-    map = new int[numRows, numCols];
+    map     = new int[numRows, numCols];
+    pathMap = new int[numRows, numCols];
 
     for (int i = 0; i < numRows; i++) {
       cols = rows[i].Split(","[0]);
@@ -44,7 +47,6 @@ public class MapGenerator : MonoBehaviour {
 
     tilePrefab.transform.localScale = new Vector3(tileScale, tileScale, 1);
 
-    Tuple3I charCoords = new Tuple3I(0, 0, 0);
 
     for (int i = 0; i < numRows; i++) {
       for (int j = 0; j < numCols; j++) {
@@ -57,13 +59,20 @@ public class MapGenerator : MonoBehaviour {
         tilePrefab.transform.localScale = new Vector3(tileScale, tileScale, 1);
 
         if (map[i, j] == 2) { // Store portal location
-          charCoords = new Tuple3I(i, j, 0);
+          portalLocations.Add(new TupleI(i, j));
         }
       }
     }
 
-    character.transform.position                        = PositionFor(charCoords);
-    character.GetComponent<MemoryComponent> ().position = charCoords;
+    TupleI charCoords = portalLocations[0];
+    character.transform.position = PositionFor(charCoords);
+
+    character.GetComponent<MemoryComponent> ().position = new Tuple3I(
+      charCoords.first,
+      charCoords.second,
+      0);
+
+    GeneratePathfindingMap();
   }
 
   private Vector3 TilePositionFor(int row, int col, float z = 0) {
@@ -83,16 +92,61 @@ public class MapGenerator : MonoBehaviour {
   }
 
   public static bool isValidPosition(Tuple3I position) {
+    return isValidPosition(position.first, position.second);
+  }
+
+  public static bool isValidPosition(TupleI position) {
+    return isValidPosition(position.first, position.second);
+  }
+
+  public static bool isValidPosition(int row, int col) {
     // if it's out of bounds
-    if ((position.first < 0) || (position.first >= map.GetLength(0)) ||
-        (position.second < 0) || (position.second >= map.GetLength(1))) {
+    if ((row < 0) || (row >= map.GetLength(0)) ||
+        (col < 0) || (col >= map.GetLength(1))) {
       return false;
     }
 
     // wall
-    if (map[position.first, position.second] == 1) {
+    if (map[row, col] == 1) {
       return false;
     }
     return true;
+  }
+
+  private void GeneratePathfindingMap() {
+    Queue<TupleI> currentFrontier;
+    Queue<TupleI> nextFrontier = new Queue<TupleI>(portalLocations);
+    TupleI   position, nextPosition;
+    TupleI[] transforms = new TupleI[4] {
+      new TupleI(1, 0),
+      new TupleI(0, 1),
+      new TupleI(-1, 0),
+      new TupleI(0, -1)
+    };
+    int index = 1;
+
+    while (nextFrontier.Count != 0) {
+      currentFrontier = nextFrontier;
+      nextFrontier    = new Queue<TupleI>();
+
+      while (currentFrontier.Count != 0) {
+        position                                 = currentFrontier.Dequeue();
+        pathMap[position.first, position.second] = index;
+
+        for (int i = 0; i < transforms.Length; i++) {
+          nextPosition = position + transforms[i];
+
+          if (!isValidPosition(nextPosition)) {
+            continue;
+          }
+
+          if (pathMap[nextPosition.first, nextPosition.second] == 0) {
+            pathMap[nextPosition.first, nextPosition.second] = index + 1;
+            nextFrontier.Enqueue(nextPosition);
+          }
+        }
+      }
+      index++;
+    }
   }
 }
