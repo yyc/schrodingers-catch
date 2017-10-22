@@ -27,9 +27,21 @@ public class EnemySpawnSystem : MonoBehaviour {
                                           Quaternion.identity);
 
         MemoryComponent memComponent = newEnemy.GetComponent<MemoryComponent>();
-        memComponent.position = new Tuple3I(i, j, 0);
+
+        memComponent.position = randomValidPosition();
         currentEnemies++;
       }
     }
+  }
+
+  Tuple3I randomValidPosition() {
+    Tuple3I position = Tuple3I.zero;
+
+    do {
+      int mapRow = Random.Range(0, MapGenerator.numRows);
+      int mapCol = Random.Range(0, MapGenerator.numCols);
+      position = new Tuple3I(mapRow, mapCol, Random.Range(0, 4));
+    } while (!MapGenerator.isValidPosition(position));
+    return position;
   }
 }

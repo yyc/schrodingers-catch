@@ -9,8 +9,9 @@ public class MapGenerator : MonoBehaviour {
   public Sprite[] sprites;
   public GameObject tilePrefab;
   public GameObject character;
-  public static string maze_filename        = "maze.csv";
+  public static string maze_filename = "maze.csv";
   public static List<TupleI>portalLocations = new List<TupleI>();
+  public static int numRows, numCols;
 
 
   private static float tileHeight = 0, tileWidth = 0, tileScale = 0;
@@ -25,7 +26,8 @@ public class MapGenerator : MonoBehaviour {
 
     string[] rows = fileData.Split("\n"[0]);
     string[] cols = rows[0].Split(","[0]);
-    int numRows = rows.Length, numCols = cols.Length;
+    numRows = rows.Length;
+    numCols = cols.Length;
     map     = new int[numRows, numCols];
     pathMap = new int[numRows, numCols];
 
