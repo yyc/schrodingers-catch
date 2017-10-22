@@ -7,6 +7,9 @@ public class EnemySpawnSystem : MonoBehaviour {
   int currentEnemies = 0;
   public GameObject enemyPrefab;
 
+  // Minimum distance from a portal
+  public int minimumSpawnDistance = 10;
+
   // Use this for initialization
   void Start() {}
 
@@ -41,7 +44,8 @@ public class EnemySpawnSystem : MonoBehaviour {
       int mapRow = Random.Range(0, MapGenerator.numRows);
       int mapCol = Random.Range(0, MapGenerator.numCols);
       position = new Tuple3I(mapRow, mapCol, Random.Range(0, 4));
-    } while (!MapGenerator.isValidPosition(position));
+    } while (!MapGenerator.isValidPosition(position) ||
+             MapGenerator.GetPathValueFor(position) < minimumSpawnDistance);
     return position;
   }
 }
