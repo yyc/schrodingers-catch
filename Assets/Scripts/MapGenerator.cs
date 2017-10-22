@@ -75,6 +75,16 @@ public class MapGenerator : MonoBehaviour {
       0);
 
     GeneratePathfindingMap();
+
+    // For debugging pathmap
+    // for (int i = 0; i < numRows; i++) {
+    //   String result = "";
+    //
+    //   for (int j = 0; j < numCols; j++) {
+    //     result += pathMap[i, j] + " ";
+    //   }
+    //   Debug.Log(result);
+    // }
   }
 
   private Vector3 TilePositionFor(int row, int col, float z = 0) {
@@ -127,13 +137,18 @@ public class MapGenerator : MonoBehaviour {
     };
     int index = 1;
 
+    foreach (TupleI temp in portalLocations) {
+      pathMap[temp.first, temp.second] = 1;
+    }
+
     while (nextFrontier.Count != 0) {
       currentFrontier = nextFrontier;
       nextFrontier    = new Queue<TupleI>();
 
       while (currentFrontier.Count != 0) {
-        position                                 = currentFrontier.Dequeue();
-        pathMap[position.first, position.second] = index;
+        position = currentFrontier.Dequeue();
+
+        //        pathMap[position.first, position.second] = index;
 
         for (int i = 0; i < transforms.Length; i++) {
           nextPosition = position + transforms[i];

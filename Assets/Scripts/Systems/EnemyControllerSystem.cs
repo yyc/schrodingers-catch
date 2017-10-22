@@ -49,6 +49,10 @@ public class EnemyControllerSystem : MonoBehaviour {
 
     // Add subsequent reposition memories
     while (MapGenerator.GetPathValueFor(position) != 1) {
+      if ((moveTick - startTick) / speedTicks > 1000) { // more than 1000 steps
+        Debug.Log("Path taking too long!");
+        return;
+      }
       position = NextPathFor(position);
       memory   = new Memory(Memory.MemoryEvent.reposition,
                             position);
