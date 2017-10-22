@@ -135,6 +135,7 @@ public class PlayerControllerSystem : MonoBehaviour {
   }
 
   void willStartWalking() {
+    memComponent.isSaving = true;
     state                 = State.transitioning;
     memComponent.state    = Memory.MemoryEvent.appearing;
     memComponent.progress = 0.1f;
@@ -161,9 +162,8 @@ public class PlayerControllerSystem : MonoBehaviour {
   }
 
   void startWalking() {
-    memComponent.isSaving = true;
-    memComponent.state    = Memory.MemoryEvent.reposition;
-    state                 = State.walking;
+    memComponent.state = Memory.MemoryEvent.reposition;
+    state              = State.walking;
   }
 
   // OnTriggerEnter2D is called whenever this object overlaps with a trigger
