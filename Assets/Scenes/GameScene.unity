@@ -564,8 +564,8 @@ MonoBehaviour:
   currentEnemies: 0
   enemyPrefab: {fileID: 1476826108245632, guid: f8b08ccec457143f4addf704172cb9a3,
     type: 2}
-  nextSpawnTime: -1
   minimumSpawnDistance: 10
+  enemySprites: []
 --- !u!1 &1951499732
 GameObject:
   m_ObjectHideFlags: 0

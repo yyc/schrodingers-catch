@@ -14,6 +14,8 @@ public class EnemySpawnSystem : MonoBehaviour {
   // Minimum distance from a portal
   public int minimumSpawnDistance = 10;
 
+  public Sprite[] enemySprites;
+
   List<int[]>waves = new List<int[]>();
 
   // Use this for initialization
