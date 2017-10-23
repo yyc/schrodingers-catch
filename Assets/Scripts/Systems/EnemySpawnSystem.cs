@@ -60,6 +60,8 @@ public class EnemySpawnSystem : MonoBehaviour {
   void Spawn(int[] enemies) {
     Timekeeper timekeeper = Timekeeper.getInstance();
 
+    int spritesLength = enemySprites.Length;
+    int spriteIndex   = Random.Range(0, spritesLength);
 
     // Spawn for each entangled group
     for (int i = 0; i < enemies.Length; i++) {
@@ -81,12 +83,17 @@ public class EnemySpawnSystem : MonoBehaviour {
         newEnemy.GetComponent<MemoryComponent>().firstActiveTick =
           timekeeper.getTick();
 
+        newEnemy.GetComponent<SpriteRenderer>().sprite =
+          enemySprites[spriteIndex];
+
         EnemyObservingSystem observer =
           newEnemy.GetComponent<EnemyObservingSystem>();
         observer.twins       = twins;
         observer.observed    = observed;
         observer.spawnSystem = this;
       }
+
+      spriteIndex = (spriteIndex + 1) % spritesLength;
     }
     currentEnemies--;
   }
