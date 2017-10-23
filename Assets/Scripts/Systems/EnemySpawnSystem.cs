@@ -24,14 +24,20 @@ public class EnemySpawnSystem : MonoBehaviour {
 
   void Spawn(int[] enemies) {
     for (int i = 0; i < enemies.Length; i++) {
+      GameObject[] twins = new GameObject[enemies[i]];
+
       for (int j = 0; j < enemies[i]; j++) {
         GameObject newEnemy = Instantiate(enemyPrefab,
                                           Vector3.zero,
                                           Quaternion.identity);
 
-        MemoryComponent memComponent = newEnemy.GetComponent<MemoryComponent>();
+        twins[j] = newEnemy;
 
-        memComponent.position = randomValidPosition();
+        newEnemy.GetComponent<MemoryComponent>().position =
+          randomValidPosition();
+        newEnemy.GetComponent<EnemyObservingSystem>().twins = twins;
+
+
         currentEnemies++;
       }
     }
