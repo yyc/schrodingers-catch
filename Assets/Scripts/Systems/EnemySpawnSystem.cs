@@ -7,13 +7,16 @@ public class EnemySpawnSystem : MonoBehaviour {
   public int currentEnemies = 0;
   public GameObject enemyPrefab;
 
-  int globalCount = 0;
+  int globalCount     = 0;
+  float nextSpawnTime = -1.0f;
 
   // Minimum distance from a portal
   public int minimumSpawnDistance = 10;
 
   // Use this for initialization
-  void        Start() {}
+  void Start() {
+    nextSpawnTime = -1.0f;
+  }
 
   public void Despawned(GameObject enemy) {
     Debug.Log("despawned " + enemy.name);
@@ -22,11 +25,17 @@ public class EnemySpawnSystem : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-    if (currentEnemies == 0) {
-      Debug.Log("Spawning More!");
+    if (currentEnemies != 0) {
+      return;
+    } else if (nextSpawnTime < 0) {
+      nextSpawnTime = Timekeeper.getInstance().maxTime;
+    } else if (Timekeeper.getInstance().getTime() > nextSpawnTime) {
+      // Increment 1 as a mutex to prevent this from running multiple times
+      currentEnemies++;
       Spawn(new int[1] {
         2
       });
+      nextSpawnTime = -1.0f;
     }
   }
 
@@ -61,6 +70,7 @@ public class EnemySpawnSystem : MonoBehaviour {
         observer.spawnSystem = this;
       }
     }
+    currentEnemies--;
     Debug.Log("Finished spawn" + currentEnemies);
   }
 
