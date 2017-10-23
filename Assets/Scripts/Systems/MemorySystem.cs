@@ -17,6 +17,11 @@ public class MemorySystem : MonoBehaviour {
   void Update() {
     int tick = Timekeeper.getInstance().getTick();
 
+    if ((tick < memComponent.firstActiveTick) ||
+        (tick > memComponent.lastActiveTick)) {
+      return;
+    }
+
     if (memComponent.hashtable.ContainsKey(tick)) {
       memComponent.memory = (Memory)memComponent.hashtable[tick];
     } else if (memComponent.memory != null) {

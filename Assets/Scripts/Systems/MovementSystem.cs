@@ -21,7 +21,7 @@ public class MovementSystem : MonoBehaviour {
   }
 
   // Update is called once per frame
-  void FixedUpdate() {
+  void LateUpdate() {
     int tick = Timekeeper.getInstance().getTick();
 
     // If it's before or after the active period, byebye

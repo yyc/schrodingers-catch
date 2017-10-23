@@ -27,8 +27,14 @@ public class EnemyObservingSystem : MonoBehaviour {
                                      (float)observed.first / observed.second);
 
     if (observed.first == observed.second) {
+      int tick                     = Timekeeper.getInstance().getTick();
       MemoryComponent memComponent = GetComponent<MemoryComponent>();
-      memComponent.lastActiveTick = Timekeeper.getInstance().getTick();
+
+      if ((tick <= memComponent.firstActiveTick) ||
+          (tick >= memComponent.lastActiveTick)) {
+        return;
+      }
+      memComponent.lastActiveTick = tick;
 
       memComponent.SetInactive();
       GetComponent<MemorySystem>().ImmediateSave();

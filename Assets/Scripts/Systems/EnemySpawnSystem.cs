@@ -7,6 +7,8 @@ public class EnemySpawnSystem : MonoBehaviour {
   public int currentEnemies = 0;
   public GameObject enemyPrefab;
 
+  int globalCount = 0;
+
   // Minimum distance from a portal
   public int minimumSpawnDistance = 10;
 
@@ -14,12 +16,14 @@ public class EnemySpawnSystem : MonoBehaviour {
   void        Start() {}
 
   public void Despawned(GameObject enemy) {
+    Debug.Log("despawned " + enemy.name);
     currentEnemies--;
   }
 
   // Update is called once per frame
   void Update() {
     if (currentEnemies == 0) {
+      Debug.Log("Spawning More!");
       Spawn(new int[1] {
         2
       });
@@ -29,16 +33,21 @@ public class EnemySpawnSystem : MonoBehaviour {
   void Spawn(int[] enemies) {
     Timekeeper timekeeper = Timekeeper.getInstance();
 
+    Debug.Log("starting spawn" + currentEnemies);
+
     for (int i = 0; i < enemies.Length; i++) {
       GameObject[] twins = new GameObject[enemies[i]];
       TupleI observed    = new TupleI(0, enemies[i]);
 
       for (int j = 0; j < enemies[i]; j++) {
+        currentEnemies++;
+
         GameObject newEnemy = Instantiate(enemyPrefab,
                                           Vector3.zero,
                                           Quaternion.identity);
 
-        twins[j] = newEnemy;
+        twins[j]      = newEnemy;
+        newEnemy.name = "Enemy" + (globalCount++);
 
         newEnemy.GetComponent<MemoryComponent>().position =
           randomValidPosition();
@@ -50,10 +59,9 @@ public class EnemySpawnSystem : MonoBehaviour {
         observer.twins       = twins;
         observer.observed    = observed;
         observer.spawnSystem = this;
-
-        currentEnemies++;
       }
     }
+    Debug.Log("Finished spawn" + currentEnemies);
   }
 
   Tuple3I randomValidPosition() {
