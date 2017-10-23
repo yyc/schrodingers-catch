@@ -28,6 +28,7 @@ public class MovementSystem : MonoBehaviour {
     if ((tick < memComponent.firstActiveTick) ||
         (tick > memComponent.lastActiveTick)) {
       transform.position = new Vector3(-100, -100, -100);
+      return;
     }
 
 

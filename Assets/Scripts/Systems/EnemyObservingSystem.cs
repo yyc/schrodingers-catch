@@ -10,6 +10,10 @@ public class EnemyObservingSystem : MonoBehaviour {
 
   protected SpriteRenderer spriteRenderer;
 
+  // Counts the number of observers and only updates the fraction when
+  // Transitioning from unobserved
+  protected int observerCount = 0;
+
   // Use this for initialization
   void Start()  {
     spriteRenderer = GetComponent<SpriteRenderer>();
@@ -28,6 +32,8 @@ public class EnemyObservingSystem : MonoBehaviour {
 
       memComponent.SetInactive();
       GetComponent<MemorySystem>().ImmediateSave();
+
+      spawnSystem.Despawned(this.gameObject);
     }
   }
 
@@ -35,14 +41,21 @@ public class EnemyObservingSystem : MonoBehaviour {
   {
     // Check the provided Collider2D parameter other to see if it is tagged
     // "PickUp", if it is...
+
     if (other.gameObject.CompareTag("Player")) {
-      observed.first += 1;
+      if (observerCount == 0) {
+        observed.first += 1;
+      }
+      observerCount++;
     }
   }
 
   void OnTriggerExit2D(Collider2D other) {
     if (other.gameObject.CompareTag("Player")) {
-      observed.first -= 1;
+      if (observerCount == 1) {
+        observed.first -= 1;
+      }
+      observerCount--;
     }
   }
 }

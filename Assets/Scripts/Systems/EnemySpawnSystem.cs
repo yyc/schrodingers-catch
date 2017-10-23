@@ -4,16 +4,16 @@ using UnityEngine;
 using Unitilities.Tuples;
 
 public class EnemySpawnSystem : MonoBehaviour {
-  int currentEnemies = 0;
+  public int currentEnemies = 0;
   public GameObject enemyPrefab;
 
   // Minimum distance from a portal
   public int minimumSpawnDistance = 10;
 
   // Use this for initialization
-  void Start() {}
+  void        Start() {}
 
-  void Despawned(GameObject enemy) {
+  public void Despawned(GameObject enemy) {
     currentEnemies--;
   }
 
