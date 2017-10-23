@@ -24,11 +24,14 @@ public class MovementSystem : MonoBehaviour {
   void FixedUpdate() {
     int tick = Timekeeper.getInstance().getTick();
 
+    // If it's before or after the active period, byebye
     if ((tick < memComponent.firstActiveTick) ||
         (tick > memComponent.lastActiveTick)) {
       transform.position = new Vector3(-100, -100, -100);
     }
 
+
+    // Else we have to update the position and opacity etc.
     switch (memComponent.state) {
     case Memory.MemoryEvent.reposition:
       transform.position =
