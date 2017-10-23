@@ -6,6 +6,7 @@ using Unitilities.Tuples;
 public class EnemyObservingSystem : MonoBehaviour {
   public GameObject[] twins;
   public TupleI observed;
+  public EnemySpawnSystem spawnSystem;
 
   protected SpriteRenderer spriteRenderer;
 
@@ -20,6 +21,14 @@ public class EnemyObservingSystem : MonoBehaviour {
                                      1,
                                      1, 1.0f -
                                      (float)observed.first / observed.second);
+
+    if (observed.first == observed.second) {
+      MemoryComponent memComponent = GetComponent<MemoryComponent>();
+      memComponent.lastActiveTick = Timekeeper.getInstance().getTick();
+
+      memComponent.SetInactive();
+      GetComponent<MemorySystem>().ImmediateSave();
+    }
   }
 
   void OnTriggerEnter2D(Collider2D other)

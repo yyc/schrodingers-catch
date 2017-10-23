@@ -13,6 +13,10 @@ public class EnemySpawnSystem : MonoBehaviour {
   // Use this for initialization
   void Start() {}
 
+  void Despawned(GameObject enemy) {
+    currentEnemies--;
+  }
+
   // Update is called once per frame
   void Update() {
     if (currentEnemies == 0) {
@@ -40,9 +44,12 @@ public class EnemySpawnSystem : MonoBehaviour {
           randomValidPosition();
         newEnemy.GetComponent<MemoryComponent>().firstActiveTick =
           timekeeper.getTick();
-        newEnemy.GetComponent<EnemyObservingSystem>().twins    = twins;
-        newEnemy.GetComponent<EnemyObservingSystem>().observed = observed;
 
+        EnemyObservingSystem observer =
+          newEnemy.GetComponent<EnemyObservingSystem>();
+        observer.twins       = twins;
+        observer.observed    = observed;
+        observer.spawnSystem = this;
 
         currentEnemies++;
       }
