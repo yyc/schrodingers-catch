@@ -7,19 +7,36 @@ public class EnemySpawnSystem : MonoBehaviour {
   public int currentEnemies = 0;
   public GameObject enemyPrefab;
 
-  int globalCount     = 0;
+  int wave            = 0;
+  int numWaves        = 0;
   float nextSpawnTime = -1.0f;
 
   // Minimum distance from a portal
   public int minimumSpawnDistance = 10;
 
+  List<int[]>waves = new List<int[]>();
+
   // Use this for initialization
   void Start() {
     nextSpawnTime = -1.0f;
+    string fileData = System.IO.File.ReadAllText("waves.txt");
+
+    string[] rows = fileData.Split("\n"[0]);
+    numWaves = rows.Length;
+
+    foreach (string row in rows) {
+      string[] values   = row.Split(" "[0]);
+      int      waveSize = values.Length;
+      int[]    wave     = new int[waveSize];
+
+      for (int i = 0; i < waveSize; i++) {
+        int.TryParse(values[i], out wave[i]);
+      }
+      waves.Add(wave);
+    }
   }
 
   public void Despawned(GameObject enemy) {
-    Debug.Log("despawned " + enemy.name);
     currentEnemies--;
   }
 
@@ -32,18 +49,17 @@ public class EnemySpawnSystem : MonoBehaviour {
     } else if (Timekeeper.getInstance().getTime() > nextSpawnTime) {
       // Increment 1 as a mutex to prevent this from running multiple times
       currentEnemies++;
-      Spawn(new int[1] {
-        2
-      });
+      Spawn(waves[Mathf.Min(waves.Count - 1, wave)]);
       nextSpawnTime = -1.0f;
+      wave++;
     }
   }
 
   void Spawn(int[] enemies) {
     Timekeeper timekeeper = Timekeeper.getInstance();
 
-    Debug.Log("starting spawn" + currentEnemies);
 
+    // Spawn for each entangled group
     for (int i = 0; i < enemies.Length; i++) {
       GameObject[] twins = new GameObject[enemies[i]];
       TupleI observed    = new TupleI(0, enemies[i]);
@@ -56,7 +72,7 @@ public class EnemySpawnSystem : MonoBehaviour {
                                           Quaternion.identity);
 
         twins[j]      = newEnemy;
-        newEnemy.name = "Enemy" + (globalCount++);
+        newEnemy.name = "Enemy-" + wave + "-" + i + "-" + j;
 
         newEnemy.GetComponent<MemoryComponent>().position =
           randomValidPosition();
@@ -71,7 +87,6 @@ public class EnemySpawnSystem : MonoBehaviour {
       }
     }
     currentEnemies--;
-    Debug.Log("Finished spawn" + currentEnemies);
   }
 
   Tuple3I randomValidPosition() {
