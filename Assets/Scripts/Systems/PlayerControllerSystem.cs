@@ -156,9 +156,10 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.SetInactive();
     currentPlayer.GetComponent<MemorySystem>().ImmediateSave();
 
-    memComponent.isSaving       = false;
-    memComponent.lastActiveTick = timekeeper.getTick();
-    memComponent.state          = Memory.MemoryEvent.reposition;
+    memComponent.isSaving        = false;
+    memComponent.lastActiveTick  = timekeeper.getTick();
+    memComponent.firstActiveTick = 0;
+    memComponent.state           = Memory.MemoryEvent.reposition;
     GameObject newPlayer = Instantiate(currentPlayer);
 
     MemoryComponent newMemoryComponent =
