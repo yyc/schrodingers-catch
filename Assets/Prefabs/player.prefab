@@ -92,6 +92,8 @@ MonoBehaviour:
     third: 0
   state: 0
   progress: 0
+  firstActiveTick: 0
+  lastActiveTick: 160000
   isSaving: 1
 --- !u!114 &114732264345427198
 MonoBehaviour:

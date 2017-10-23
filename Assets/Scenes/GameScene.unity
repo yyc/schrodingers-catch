@@ -141,6 +141,17 @@ PolygonCollider2D:
       - {x: 3.3187463, y: 0.82493186}
       - {x: 0.54653347, y: 0.32613277}
       - {x: 0.5422652, y: -0.29604673}
+--- !u!122 &5567380
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5567372}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 83882861
+  m_Size: 0.3
 --- !u!1 &443229449
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,11 +735,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4748753806760952, guid: d72f04a75ee644604972ade0d007beda, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.40000004
       objectReference: {fileID: 0}
     - target: {fileID: 4748753806760952, guid: d72f04a75ee644604972ade0d007beda, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.40000004
       objectReference: {fileID: 0}
     - target: {fileID: 212857290901012134, guid: d72f04a75ee644604972ade0d007beda,
         type: 2}
@@ -739,6 +750,21 @@ Prefab:
     - target: {fileID: 1703424125306958, guid: d72f04a75ee644604972ade0d007beda, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 212857290901012134, guid: d72f04a75ee644604972ade0d007beda,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212857290901012134, guid: d72f04a75ee644604972ade0d007beda,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212857290901012134, guid: d72f04a75ee644604972ade0d007beda,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d72f04a75ee644604972ade0d007beda, type: 2}

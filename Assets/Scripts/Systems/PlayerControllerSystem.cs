@@ -132,6 +132,8 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.progress = 0;
     memComponent.state    = Memory.MemoryEvent.disappearing;
     currentPlayer.GetComponent<MovementSystem>().startTransition(transitionTime);
+    Behaviour halo = (Behaviour)currentPlayer.GetComponent("Halo");
+    halo.enabled = false;
   }
 
   void willStartWalking() {
@@ -164,6 +166,9 @@ public class PlayerControllerSystem : MonoBehaviour {
 
     currentPlayer = newPlayer;
     memComponent  = newMemoryComponent;
+
+    Behaviour halo = (Behaviour)currentPlayer.GetComponent("Halo");
+    halo.enabled = true;
 
     memComponent.state    = Memory.MemoryEvent.appearing;
     memComponent.progress = 0.1f;

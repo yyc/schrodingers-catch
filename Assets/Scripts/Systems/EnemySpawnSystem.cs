@@ -44,7 +44,7 @@ public class EnemySpawnSystem : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-    if (currentEnemies != 0) {
+    if (currentEnemies > 0) {
       return;
     } else if (nextSpawnTime < 0) {
       nextSpawnTime = Timekeeper.getInstance().maxTime;
