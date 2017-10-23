@@ -23,6 +23,8 @@ public class EnemySpawnSystem : MonoBehaviour {
   }
 
   void Spawn(int[] enemies) {
+    Timekeeper timekeeper = Timekeeper.getInstance();
+
     for (int i = 0; i < enemies.Length; i++) {
       GameObject[] twins = new GameObject[enemies[i]];
 
@@ -35,6 +37,8 @@ public class EnemySpawnSystem : MonoBehaviour {
 
         newEnemy.GetComponent<MemoryComponent>().position =
           randomValidPosition();
+        newEnemy.GetComponent<MemoryComponent>().firstActiveTick =
+          timekeeper.getTick();
         newEnemy.GetComponent<EnemyObservingSystem>().twins = twins;
 
 

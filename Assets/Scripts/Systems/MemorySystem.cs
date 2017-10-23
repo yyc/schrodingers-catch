@@ -7,7 +7,6 @@ using Unitilities.Tuples;
 // Stores and replays the object's position and actions
 public class MemorySystem : MonoBehaviour {
   private MemoryComponent memComponent;
-  Timekeeper timekeeper;
 
   // Use this for initialization
   void Start() {
@@ -23,5 +22,12 @@ public class MemorySystem : MonoBehaviour {
     } else if (memComponent.memory != null) {
       memComponent.hashtable[tick] = memComponent.memory;
     }
+  }
+
+  public void ImmediateSave(int tick = -100) {
+    if (tick == -100) {
+      tick = Timekeeper.getInstance().getTick();
+    }
+    memComponent.hashtable[tick] = memComponent.memory;
   }
 }

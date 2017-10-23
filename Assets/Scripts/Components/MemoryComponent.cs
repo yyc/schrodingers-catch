@@ -9,6 +9,7 @@ public class MemoryComponent : MonoBehaviour {
   public float progress = 0;
   public Memory memory;
   public Hashtable hashtable;
+  public int firstActiveTick = 0, lastActiveTick = 160000;
 
   public bool isSaving = true; // true to create new memories, false to replay
                                // old ones
@@ -40,6 +41,13 @@ public class MemoryComponent : MonoBehaviour {
     } else {
       progress = memory.progress();
     }
+  }
+
+  public void SetInactive(Tuple3I pos = null) {
+    if (pos == null) {
+      pos = position;
+    }
+    memory = new Memory(Memory.MemoryEvent.inactive, pos);
   }
 
   public void deltaPosition(int firstDelta, int secondDelta, int thirdValue) {

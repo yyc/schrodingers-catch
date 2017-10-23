@@ -135,6 +135,12 @@ public class PlayerControllerSystem : MonoBehaviour {
   }
 
   void willStartWalking() {
+    // set inactive state
+    memComponent.SetInactive();
+    currentPlayer.GetComponent<MemorySystem>().ImmediateSave(
+      timekeeper.getTick() - 1);
+    memComponent.firstActiveTick = timekeeper.getTick() - 1;
+
     memComponent.isSaving = true;
     state                 = State.transitioning;
     memComponent.state    = Memory.MemoryEvent.appearing;
@@ -144,8 +150,13 @@ public class PlayerControllerSystem : MonoBehaviour {
   }
 
   void startTraveling() {
-    memComponent.isSaving = false;
-    memComponent.state    = Memory.MemoryEvent.reposition;
+    // Save inactive state
+    memComponent.SetInactive();
+    currentPlayer.GetComponent<MemorySystem>().ImmediateSave();
+
+    memComponent.isSaving       = false;
+    memComponent.lastActiveTick = timekeeper.getTick();
+    memComponent.state          = Memory.MemoryEvent.reposition;
     GameObject newPlayer = Instantiate(currentPlayer);
 
     MemoryComponent newMemoryComponent =

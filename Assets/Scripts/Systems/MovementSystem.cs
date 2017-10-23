@@ -22,10 +22,16 @@ public class MovementSystem : MonoBehaviour {
 
   // Update is called once per frame
   void FixedUpdate() {
+    int tick = Timekeeper.getInstance().getTick();
+
+    if ((tick < memComponent.firstActiveTick) ||
+        (tick > memComponent.lastActiveTick)) {
+      transform.position = new Vector3(-100, -100, -100);
+    }
+
     switch (memComponent.state) {
     case Memory.MemoryEvent.reposition:
-      spriteRenderer.color = Color.white;
-      transform.position   =
+      transform.position =
         MapGenerator.PositionFor(memComponent.position, -1);
 
       transform.rotation = directions[memComponent.position.third];
@@ -37,6 +43,10 @@ public class MovementSystem : MonoBehaviour {
 
     case Memory.MemoryEvent.disappearing:
       spriteRenderer.color = new Color(1, 1, 1, 1.0f - memComponent.progress);
+      break;
+
+    case Memory.MemoryEvent.inactive:
+      spriteRenderer.color = Color.clear;
       break;
     }
   }
