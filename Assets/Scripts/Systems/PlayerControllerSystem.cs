@@ -132,9 +132,18 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.progress = 0;
     memComponent.state    = Memory.MemoryEvent.disappearing;
     currentPlayer.GetComponent<MovementSystem>().startTransition(transitionTime);
+    Behaviour halo = (Behaviour)currentPlayer.GetComponent("Halo");
+    halo.enabled = false;
   }
 
   void willStartWalking() {
+    // set inactive state
+    memComponent.SetInactive();
+    currentPlayer.GetComponent<MemorySystem>().ImmediateSave(
+      timekeeper.getTick() - 1);
+    memComponent.firstActiveTick = timekeeper.getTick() - 1;
+
+    memComponent.isSaving = true;
     state                 = State.transitioning;
     memComponent.state    = Memory.MemoryEvent.appearing;
     memComponent.progress = 0.1f;
@@ -143,8 +152,14 @@ public class PlayerControllerSystem : MonoBehaviour {
   }
 
   void startTraveling() {
-    memComponent.isSaving = false;
-    memComponent.state    = Memory.MemoryEvent.reposition;
+    // Save inactive state
+    memComponent.SetInactive();
+    currentPlayer.GetComponent<MemorySystem>().ImmediateSave();
+
+    memComponent.isSaving        = false;
+    memComponent.lastActiveTick  = timekeeper.getTick();
+    memComponent.firstActiveTick = 0;
+    memComponent.state           = Memory.MemoryEvent.reposition;
     GameObject newPlayer = Instantiate(currentPlayer);
 
     MemoryComponent newMemoryComponent =
@@ -152,6 +167,9 @@ public class PlayerControllerSystem : MonoBehaviour {
 
     currentPlayer = newPlayer;
     memComponent  = newMemoryComponent;
+
+    Behaviour halo = (Behaviour)currentPlayer.GetComponent("Halo");
+    halo.enabled = true;
 
     memComponent.state    = Memory.MemoryEvent.appearing;
     memComponent.progress = 0.1f;
@@ -161,9 +179,8 @@ public class PlayerControllerSystem : MonoBehaviour {
   }
 
   void startWalking() {
-    memComponent.isSaving = true;
-    memComponent.state    = Memory.MemoryEvent.reposition;
-    state                 = State.walking;
+    memComponent.state = Memory.MemoryEvent.reposition;
+    state              = State.walking;
   }
 
   // OnTriggerEnter2D is called whenever this object overlaps with a trigger

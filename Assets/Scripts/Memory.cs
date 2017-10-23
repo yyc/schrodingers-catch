@@ -7,7 +7,8 @@ public class Memory : Tuple<int, Tuple3I>{
   public enum MemoryEvent {
     reposition,   // tuple holds new (x,y,orientation)
     appearing,    // tuple holds only (animationProgress, null, null)
-    disappearing, // tuple holds (progress, null, null)
+    disappearing, // tuple holds (progress, null, null),
+    inactive,     // tuple holds position (x, y, orientation)
   };
 
   public Memory(MemoryEvent memEvent, int row, int col, int orientation) :

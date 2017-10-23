@@ -24,6 +24,7 @@ public class Timekeeper : MonoBehaviour {
   }
 
   public float time        = 0;
+  public float maxTime     = 0;
   public int tick          = 0;
   private bool isRewinding = false;
 
@@ -38,7 +39,8 @@ public class Timekeeper : MonoBehaviour {
   void FixedUpdate()
   {
     if (!isRewinding) {
-      time += Time.deltaTime;
+      time   += Time.deltaTime;
+      maxTime = Mathf.Max(time, maxTime);
     }
 
     // FP operations are faster if it's a power of 2
@@ -56,6 +58,10 @@ public class Timekeeper : MonoBehaviour {
     return tick;
   }
 
+  public int GetTickIn(float offset) {
+    return Mathf.FloorToInt((time + offset) * 16);
+  }
+
   public void startRewind()
   {
     isRewinding = true;
@@ -68,6 +74,6 @@ public class Timekeeper : MonoBehaviour {
 
   public void immediateOffset(float amount)
   {
-    time += amount;
+    time = Mathf.Clamp(time + amount, 0, maxTime);
   }
 }

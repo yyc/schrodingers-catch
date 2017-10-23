@@ -90,6 +90,10 @@ MonoBehaviour:
     first: 0
     second: 0
     third: 0
+  state: 0
+  progress: 0
+  firstActiveTick: 0
+  lastActiveTick: 160000
   isSaving: 1
 --- !u!114 &114732264345427198
 MonoBehaviour:
@@ -134,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b561cff0981214ec0ad4add6b9fb4fa9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d8e8d024ec344bf29e02199b887cbc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
