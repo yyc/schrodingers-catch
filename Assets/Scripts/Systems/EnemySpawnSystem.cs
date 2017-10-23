@@ -27,6 +27,7 @@ public class EnemySpawnSystem : MonoBehaviour {
 
     for (int i = 0; i < enemies.Length; i++) {
       GameObject[] twins = new GameObject[enemies[i]];
+      TupleI observed    = new TupleI(0, enemies[i]);
 
       for (int j = 0; j < enemies[i]; j++) {
         GameObject newEnemy = Instantiate(enemyPrefab,
@@ -39,7 +40,8 @@ public class EnemySpawnSystem : MonoBehaviour {
           randomValidPosition();
         newEnemy.GetComponent<MemoryComponent>().firstActiveTick =
           timekeeper.getTick();
-        newEnemy.GetComponent<EnemyObservingSystem>().twins = twins;
+        newEnemy.GetComponent<EnemyObservingSystem>().twins    = twins;
+        newEnemy.GetComponent<EnemyObservingSystem>().observed = observed;
 
 
         currentEnemies++;

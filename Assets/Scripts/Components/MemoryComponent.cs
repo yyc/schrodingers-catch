@@ -15,7 +15,7 @@ public class MemoryComponent : MonoBehaviour {
                                // old ones
 
   // Use this for initialization
-  void Start() {
+  void Awake() {
     state     = Memory.MemoryEvent.reposition;
     hashtable = new Hashtable();
   }

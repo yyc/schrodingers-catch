@@ -18,7 +18,7 @@ public class MapGenerator : MonoBehaviour {
   private static Vector3 mapOrigin = Vector3.zero;
 
   // Use this for initialization
-  void Start() {
+  void Awake() {
     mapOrigin = transform.position;
 
     // Read in maze

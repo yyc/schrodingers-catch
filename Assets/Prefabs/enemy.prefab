@@ -104,6 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twins: []
+  observed:
+    first: 0
+    second: 0
 --- !u!114 &114363432942179618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +159,8 @@ MonoBehaviour:
     third: 0
   state: 0
   progress: 0
+  firstActiveTick: 0
+  lastActiveTick: 160000
   isSaving: 1
 --- !u!212 &212376870519102834
 SpriteRenderer:
