@@ -45,8 +45,11 @@ public class Timekeeper : MonoBehaviour {
 
     // FP operations are faster if it's a power of 2
     // ....maybe
-    tick           = Mathf.FloorToInt(time * 16);
-    timerText.text = time.ToString();
+    tick = Mathf.FloorToInt(time * 16);
+
+    if (timerText != null) {
+      timerText.text = time.ToString();
+    }
   }
 
   public float getTime()

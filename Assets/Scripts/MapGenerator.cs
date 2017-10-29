@@ -12,17 +12,18 @@ public class MapGenerator : MonoBehaviour {
   public static string maze_filename = "maze.csv";
   public static List<TupleI>portalLocations = new List<TupleI>();
   public static int numRows, numCols;
-
+  public string mapFile = "maze.csv";
 
   private static float tileHeight = 0, tileWidth = 0, tileScale = 0;
   private static Vector3 mapOrigin = Vector3.zero;
 
   // Use this for initialization
   void Awake() {
-    mapOrigin = transform.position;
+    mapOrigin       = transform.position;
+    portalLocations = new List<TupleI>();
 
     // Read in maze
-    string fileData = System.IO.File.ReadAllText("maze.csv");
+    string fileData = System.IO.File.ReadAllText(mapFile).Trim();
 
     string[] rows = fileData.Split("\n"[0]);
     string[] cols = rows[0].Split(","[0]);
@@ -46,9 +47,10 @@ public class MapGenerator : MonoBehaviour {
                  (tileHeight * numRows);
     tileHeight *= tileScale;
     tileWidth  *= tileScale;
-
-    tilePrefab.transform.localScale = new Vector3(tileScale, tileScale, 1);
-
+    Debug.Log(tilePrefab.transform.localScale);
+    tilePrefab.transform.localScale =
+      new Vector3(tileScale, tileScale, tileScale);
+    Debug.Log(tilePrefab.transform.localScale);
 
     for (int i = 0; i < numRows; i++) {
       for (int j = 0; j < numCols; j++) {
@@ -58,7 +60,9 @@ public class MapGenerator : MonoBehaviour {
           Instantiate(tilePrefab, position, Quaternion.identity, transform);
         newTile.GetComponent<SpriteRenderer> ().sprite = sprites[map[i, j]];
 
-        tilePrefab.transform.localScale = new Vector3(tileScale, tileScale, 1);
+        tilePrefab.transform.localScale = new Vector3(tileScale,
+                                                      tileScale,
+                                                      tileScale);
 
         if (map[i, j] == 2) { // Store portal location
           portalLocations.Add(new TupleI(i, j));
@@ -66,15 +70,17 @@ public class MapGenerator : MonoBehaviour {
       }
     }
 
-    TupleI charCoords = portalLocations[0];
-    character.transform.position = PositionFor(charCoords);
+    if (portalLocations.Count > 0) {
+      TupleI charCoords = portalLocations[0];
+      character.transform.position = PositionFor(charCoords);
 
-    character.GetComponent<MemoryComponent> ().position = new Tuple3I(
-      charCoords.first,
-      charCoords.second,
-      0);
+      character.GetComponent<MemoryComponent> ().position = new Tuple3I(
+        charCoords.first,
+        charCoords.second,
+        0);
 
-    GeneratePathfindingMap();
+      GeneratePathfindingMap();
+    }
 
     // For debugging pathmap
     // for (int i = 0; i < numRows; i++) {
