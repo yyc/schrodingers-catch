@@ -121,6 +121,44 @@ public class MapGenerator : MonoBehaviour {
     return mapOrigin + new Vector3(col * tileHeight, row * tileWidth, z);
   }
 
+  public static bool isValidMove(TupleI old, TupleI newPosition) {
+    return isValidMove(old.first,
+                       old.second,
+                       newPosition.first,
+                       newPosition.second);
+  }
+
+  public static bool isValidMove(Tuple3I old, Tuple3I newPosition) {
+    return isValidMove(old.first,
+                       old.second,
+                       newPosition.first,
+                       newPosition.second);
+  }
+
+  public static bool isValidMove(int oldRow, int oldCol, int newRow, int newCol) {
+    if ((oldRow != newRow) && (oldCol != newCol)) {
+      // cannot move diagonally
+      return false;
+    }
+
+    // if it's out of bounds
+    if ((newRow < 0) || (newRow >= gridRows) ||
+        (newCol < 0) || (newCol >= gridCols)) {
+      return false;
+    }
+
+    if (oldRow != newRow) {
+      return map[oldRow + newRow + 1, oldCol * 2 + 1] != 1;
+    }
+
+    if (oldCol != newCol) {
+      return map[oldRow * 2 + 1, oldCol + newCol + 1] != 1;
+    }
+
+    // They're equal
+    return true;
+  }
+
   public static bool isValidPosition(Tuple3I position) {
     return isValidPosition(position.first, position.second);
   }
@@ -131,13 +169,13 @@ public class MapGenerator : MonoBehaviour {
 
   public static bool isValidPosition(int row, int col) {
     // if it's out of bounds
-    if ((row < 0) || (row >= map.GetLength(0)) ||
-        (col < 0) || (col >= map.GetLength(1))) {
+    if ((row < 0) || (row >= gridRows) ||
+        (col < 0) || (col >= gridCols)) {
       return false;
     }
 
     // wall
-    if (map[row, col] == 1) {
+    if (map[row * 2 + 1, col * 2 + 1] == 1) {
       return false;
     }
     return true;
