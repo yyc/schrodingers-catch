@@ -5,7 +5,7 @@ using UnityEngine;
 public class CompositeTileComponent : MonoBehaviour {
   public int[] map = new int[9];
   public GameObject[] tileObjects;
-  public static Sprite[] walledSprites;
+  public Sprite[] walledSprites;
   public Sprite wallSprite;
   public Sprite pathSprite;
 
@@ -21,21 +21,11 @@ public class CompositeTileComponent : MonoBehaviour {
 
   // Use this for initialization
   void Start()  {
-    if ((walledSprites == null) || (walledSprites.Length == 0)) {
-      walledSprites = new Sprite[9];
-
-      for (int i = 0; i < 9; i++) {
-        walledSprites[i] =
-          tileObjects[i].GetComponent<SpriteRenderer>().sprite;
-      }
-    }
     refreshTiles();
   }
 
   // Update is called once per frame
-  void Update() {
-    refreshTiles();
-  }
+  void        Update() {}
 
   public void refreshTiles() {
     int center = map[4];

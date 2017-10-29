@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour {
   public GameObject character;
   public static string maze_filename = "maze.csv";
   public static List<TupleI>portalLocations = new List<TupleI>();
-  public static int numRows, numCols;
+  public static int numRows, numCols, gridRows, gridCols;
   public string mapFile = "maze.csv";
 
   private static float tileHeight = 0, tileWidth = 0, tileScale = 0;
@@ -27,10 +27,12 @@ public class MapGenerator : MonoBehaviour {
 
     string[] rows = fileData.Split("\n"[0]);
     string[] cols = rows[0].Split(","[0]);
-    numRows = rows.Length;
-    numCols = cols.Length;
-    map     = new int[numRows, numCols];
-    pathMap = new int[numRows, numCols];
+    numRows  = rows.Length;
+    numCols  = cols.Length;
+    gridRows = numRows / 2;
+    gridCols = numCols / 2;
+    map      = new int[numRows, numCols];
+    pathMap  = new int[gridRows, gridCols];
 
     for (int i = 0; i < numRows; i++) {
       cols = rows[i].Split(","[0]);
@@ -44,24 +46,34 @@ public class MapGenerator : MonoBehaviour {
     tileHeight = tilePrefab.GetComponent<BoxCollider2D>().size.y;
     tileWidth  = tileHeight; // make it square for now
     tileScale  = GetComponent<BoxCollider2D>().size.y /
-                 (tileHeight * numRows);
+                 (tileHeight * gridRows);
     tileHeight *= tileScale;
     tileWidth  *= tileScale;
-    Debug.Log(tilePrefab.transform.localScale);
-    tilePrefab.transform.localScale =
-      new Vector3(tileScale, tileScale, tileScale);
-    Debug.Log(tilePrefab.transform.localScale);
 
-    for (int i = 0; i < numRows; i++) {
-      for (int j = 0; j < numCols; j++) {
+    tilePrefab.transform.localScale =
+      new Vector3(tileScale, -1 * tileScale, tileScale);
+
+    for (int i = 0; i < gridRows; i++) {
+      for (int j = 0; j < gridCols; j++) {
+        int iRaw         = i * 2 + 1;
+        int jRaw         = j * 2 + 1;
         Vector3 position = TilePositionFor(i, j);
 
         GameObject newTile =
           Instantiate(tilePrefab, position, Quaternion.identity, transform);
-        newTile.GetComponent<SpriteRenderer> ().sprite = sprites[map[i, j]];
+
+        CompositeTileComponent tc =
+          newTile.GetComponent<CompositeTileComponent>();
+
+        for (int y = -1; y <= 1; y++) {
+          for (int x = -1; x <= 1; x++) {
+            tc.map[4 + x + y * 3] = map[iRaw + y, jRaw + x];
+          }
+        }
+        tc.refreshTiles();
 
         tilePrefab.transform.localScale = new Vector3(tileScale,
-                                                      tileScale,
+                                                      -1 * tileScale,
                                                       tileScale);
 
         if (map[i, j] == 2) { // Store portal location
