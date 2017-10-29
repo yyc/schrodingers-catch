@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 61840160598306982}
   - component: {fileID: 114468518909515716}
   m_Layer: 0
-  m_Name: CompositeTile
+  m_Name: Tile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 1855216108358794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.83, y: 6.95, z: 0.63380814}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5208334, y: -0.5208334, z: 0.5208334}
   m_Children:
   - {fileID: 4186121015160706}
   - {fileID: 4298635657849772}
@@ -359,8 +359,23 @@ MonoBehaviour:
   - {fileID: 1003834134325810}
   - {fileID: 1382216869538344}
   - {fileID: 1360155324452788}
+  walledSprites:
+  - {fileID: 21300000, guid: 663b02fc6ece14ba3af170ab07deceff, type: 3}
+  - {fileID: 21300000, guid: a4801e22577cf41078f0f74ae04d65d4, type: 3}
+  - {fileID: 21300000, guid: b11b5c422acd2475a9cdf5cf1ebc4315, type: 3}
+  - {fileID: 21300000, guid: 1bdd2260ed3ff4fbd8abc5962e3439ca, type: 3}
+  - {fileID: 21300000, guid: f9fc8b16dbcf14295b012f194f2ef6f7, type: 3}
+  - {fileID: 21300000, guid: 8c8eb28c3c978445e84246e7b8ed683b, type: 3}
+  - {fileID: 21300000, guid: 1038f0a677de54b04aa77dd70eadb798, type: 3}
+  - {fileID: 21300000, guid: 7746f8439ef214168ba6b2267ce287fd, type: 3}
+  - {fileID: 21300000, guid: 0df83a285b1f7421b9e699dd9cb80ddf, type: 3}
   wallSprite: {fileID: 21300000, guid: cfdfad5c68bee4bf68dfe86e52932d4d, type: 3}
   pathSprite: {fileID: 21300000, guid: f9fc8b16dbcf14295b012f194f2ef6f7, type: 3}
+  cornerSprites:
+  - {fileID: 21300000, guid: 0b111dd239026447994e337e987280ea, type: 3}
+  - {fileID: 21300000, guid: f994c603f880c478f8db4252e8685831, type: 3}
+  - {fileID: 21300000, guid: 2ad02eefec290457cad05f61171f8deb, type: 3}
+  - {fileID: 21300000, guid: 4978a40e7d3f04dea8bc0676f5392399, type: 3}
 --- !u!212 &212074190201242098
 SpriteRenderer:
   m_ObjectHideFlags: 1
