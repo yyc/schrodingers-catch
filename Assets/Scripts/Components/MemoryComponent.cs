@@ -63,8 +63,6 @@ public class MemoryComponent : MonoBehaviour {
 
     if (MapGenerator.isValidMove(position, newPosition)) {
       position = newPosition;
-    } else {
-      Debug.Log("Invalid move!");
     }
   }
 }
