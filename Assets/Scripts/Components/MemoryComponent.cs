@@ -61,7 +61,7 @@ public class MemoryComponent : MonoBehaviour {
       thirdValue
       );
 
-    if (MapGenerator.isValidPosition(newPosition)) {
+    if (MapGenerator.isValidMove(position, newPosition)) {
       position = newPosition;
     }
   }

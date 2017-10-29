@@ -27,7 +27,7 @@ public class MovementSystem : MonoBehaviour {
     // If it's before or after the active period, byebye
     if ((tick < memComponent.firstActiveTick) ||
         (tick > memComponent.lastActiveTick)) {
-      transform.position = new Vector3(-100, -100, -100);
+      transform.position = new Vector3(-100, -100, 0);
       return;
     }
 

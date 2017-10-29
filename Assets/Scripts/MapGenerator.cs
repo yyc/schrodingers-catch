@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour {
   public GameObject character;
   public static string maze_filename = "maze.csv";
   public static List<TupleI>portalLocations = new List<TupleI>();
-  public static int numRows, numCols;
+  public static int numRows, numCols, gridRows, gridCols;
   public string mapFile = "maze.csv";
 
   private static float tileHeight = 0, tileWidth = 0, tileScale = 0;
@@ -27,10 +27,12 @@ public class MapGenerator : MonoBehaviour {
 
     string[] rows = fileData.Split("\n"[0]);
     string[] cols = rows[0].Split(","[0]);
-    numRows = rows.Length;
-    numCols = cols.Length;
-    map     = new int[numRows, numCols];
-    pathMap = new int[numRows, numCols];
+    numRows  = rows.Length;
+    numCols  = cols.Length;
+    gridRows = numRows / 2;
+    gridCols = numCols / 2;
+    map      = new int[numRows, numCols];
+    pathMap  = new int[gridRows, gridCols];
 
     for (int i = 0; i < numRows; i++) {
       cols = rows[i].Split(","[0]);
@@ -44,24 +46,34 @@ public class MapGenerator : MonoBehaviour {
     tileHeight = tilePrefab.GetComponent<BoxCollider2D>().size.y;
     tileWidth  = tileHeight; // make it square for now
     tileScale  = GetComponent<BoxCollider2D>().size.y /
-                 (tileHeight * numRows);
+                 (tileHeight * gridRows);
     tileHeight *= tileScale;
     tileWidth  *= tileScale;
-    Debug.Log(tilePrefab.transform.localScale);
-    tilePrefab.transform.localScale =
-      new Vector3(tileScale, tileScale, tileScale);
-    Debug.Log(tilePrefab.transform.localScale);
 
-    for (int i = 0; i < numRows; i++) {
-      for (int j = 0; j < numCols; j++) {
+    tilePrefab.transform.localScale =
+      new Vector3(tileScale, -1 * tileScale, tileScale);
+
+    for (int i = 0; i < gridRows; i++) {
+      for (int j = 0; j < gridCols; j++) {
+        int iRaw         = i * 2 + 1;
+        int jRaw         = j * 2 + 1;
         Vector3 position = TilePositionFor(i, j);
 
         GameObject newTile =
           Instantiate(tilePrefab, position, Quaternion.identity, transform);
-        newTile.GetComponent<SpriteRenderer> ().sprite = sprites[map[i, j]];
+
+        CompositeTileComponent tc =
+          newTile.GetComponent<CompositeTileComponent>();
+
+        for (int y = -1; y <= 1; y++) {
+          for (int x = -1; x <= 1; x++) {
+            tc.map[4 + x + y * 3] = map[iRaw + y, jRaw + x];
+          }
+        }
+        tc.refreshTiles();
 
         tilePrefab.transform.localScale = new Vector3(tileScale,
-                                                      tileScale,
+                                                      -1 * tileScale,
                                                       tileScale);
 
         if (map[i, j] == 2) { // Store portal location
@@ -109,6 +121,44 @@ public class MapGenerator : MonoBehaviour {
     return mapOrigin + new Vector3(col * tileHeight, row * tileWidth, z);
   }
 
+  public static bool isValidMove(TupleI old, TupleI newPosition) {
+    return isValidMove(old.first,
+                       old.second,
+                       newPosition.first,
+                       newPosition.second);
+  }
+
+  public static bool isValidMove(Tuple3I old, Tuple3I newPosition) {
+    return isValidMove(old.first,
+                       old.second,
+                       newPosition.first,
+                       newPosition.second);
+  }
+
+  public static bool isValidMove(int oldRow, int oldCol, int newRow, int newCol) {
+    if ((oldRow != newRow) && (oldCol != newCol)) {
+      // cannot move diagonally
+      return false;
+    }
+
+    // if it's out of bounds
+    if ((newRow < 0) || (newRow >= gridRows) ||
+        (newCol < 0) || (newCol >= gridCols)) {
+      return false;
+    }
+
+    if (oldRow != newRow) {
+      return map[oldRow + newRow + 1, oldCol * 2 + 1] != 1;
+    }
+
+    if (oldCol != newCol) {
+      return map[oldRow * 2 + 1, oldCol + newCol + 1] != 1;
+    }
+
+    // They're equal
+    return true;
+  }
+
   public static bool isValidPosition(Tuple3I position) {
     return isValidPosition(position.first, position.second);
   }
@@ -119,13 +169,13 @@ public class MapGenerator : MonoBehaviour {
 
   public static bool isValidPosition(int row, int col) {
     // if it's out of bounds
-    if ((row < 0) || (row >= map.GetLength(0)) ||
-        (col < 0) || (col >= map.GetLength(1))) {
+    if ((row < 0) || (row >= gridRows) ||
+        (col < 0) || (col >= gridCols)) {
       return false;
     }
 
     // wall
-    if (map[row, col] == 1) {
+    if (map[row * 2 + 1, col * 2 + 1] == 1) {
       return false;
     }
     return true;

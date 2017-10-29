@@ -70,7 +70,7 @@ public class EnemyControllerSystem : MonoBehaviour {
     for (int i = 0; i < 4; i++) {
       nextPosition = position + directions[i];
 
-      if (!MapGenerator.isValidPosition(nextPosition)) {
+      if (!MapGenerator.isValidMove(position, nextPosition)) {
         continue;
       }
 
