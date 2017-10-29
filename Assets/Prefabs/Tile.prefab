@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212202085434157994}
   - component: {fileID: 61683586208373424}
   m_Layer: 0
-  m_Name: Tile 1
+  m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 1420252191012428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.609731, y: 3.126077, z: 0.63380814}
-  m_LocalScale: {x: 0.15625, y: 0.15625, z: 1}
+  m_LocalScale: {x: 0.2604167, y: 0.2604167, z: 0.2604167}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
