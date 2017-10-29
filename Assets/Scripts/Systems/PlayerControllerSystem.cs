@@ -137,10 +137,25 @@ public class PlayerControllerSystem : MonoBehaviour {
   }
 
   void willStartWalking() {
+    GameObject newPlayer = Instantiate(currentPlayer);
+
+    MemoryComponent newMemoryComponent =
+      newPlayer.GetComponent<MemoryComponent> ();
+
+    currentPlayer = newPlayer;
+    memComponent  = newMemoryComponent;
+
+    Behaviour halo = (Behaviour)currentPlayer.GetComponent("Halo");
+    halo.enabled = true;
+
+    memComponent.state    = Memory.MemoryEvent.appearing;
+    memComponent.progress = 0.1f;
+
+
     // set inactive state
-    memComponent.SetInactive();
-    currentPlayer.GetComponent<MemorySystem>().ImmediateSave(
-      timekeeper.getTick() - 1);
+    // memComponent.SetInactive();
+    // currentPlayer.GetComponent<MemorySystem>().ImmediateSave(
+    //   timekeeper.getTick() - 1);
     memComponent.firstActiveTick = timekeeper.getTick() - 1;
 
     memComponent.isSaving = true;
@@ -160,19 +175,7 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.lastActiveTick  = timekeeper.getTick();
     memComponent.firstActiveTick = 0;
     memComponent.state           = Memory.MemoryEvent.reposition;
-    GameObject newPlayer = Instantiate(currentPlayer);
 
-    MemoryComponent newMemoryComponent =
-      newPlayer.GetComponent<MemoryComponent> ();
-
-    currentPlayer = newPlayer;
-    memComponent  = newMemoryComponent;
-
-    Behaviour halo = (Behaviour)currentPlayer.GetComponent("Halo");
-    halo.enabled = true;
-
-    memComponent.state    = Memory.MemoryEvent.appearing;
-    memComponent.progress = 0.1f;
 
     state = State.traveling;
     timekeeper.startRewind();
