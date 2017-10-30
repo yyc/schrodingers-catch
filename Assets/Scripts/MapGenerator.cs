@@ -76,7 +76,7 @@ public class MapGenerator : MonoBehaviour {
                                                       -1 * tileScale,
                                                       tileScale);
 
-        if (map[i, j] == 2) { // Store portal location
+        if (map[iRaw, jRaw] == 2) { // Store portal location
           portalLocations.Add(new TupleI(i, j));
         }
       }
@@ -209,7 +209,7 @@ public class MapGenerator : MonoBehaviour {
         for (int i = 0; i < transforms.Length; i++) {
           nextPosition = position + transforms[i];
 
-          if (!isValidPosition(nextPosition)) {
+          if (!isValidMove(position, nextPosition)) {
             continue;
           }
 
