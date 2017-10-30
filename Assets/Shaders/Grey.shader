@@ -1,52 +1,49 @@
-﻿Shader "Hidden/Grey"
-{
-	Properties
-	{
-		_MainTex ("Texture", 2D) = "white" {}
-	}
-	SubShader
-	{
-		// No culling or depth
-		Cull Off ZWrite Off ZTest Always
+Shader "Custom/Grey" {
+ Properties {
+ 	_bwBlend ("Black & White blend", Range (0, 1)) = 0
+	_MainTex ("Base (RGBA)", 2D) = "white" {}
 
-		Pass
-		{
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			
-			#include "UnityCG.cginc"
+ }
+ SubShader {
+    Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+    Blend SrcAlpha OneMinusSrcAlpha
+    Cull Back
+     LOD 200
 
-			struct appdata
-			{
-				float4 vertex : POSITION;
-				float2 uv : TEXCOORD0;
-			};
+     CGPROGRAM
+     #pragma surface surf Standard vertex:vert fullforwardshadows alpha:fade
+     #pragma target 3.0
 
-			struct v2f
-			{
-				float2 uv : TEXCOORD0;
-				float4 vertex : SV_POSITION;
-			};
+     struct Input {
+         float4 color : COLOR; // Vertex color stored here by vert() method
+				 float4 uv; // vertex coordinate
+     };
 
-			v2f vert (appdata v)
-			{
-				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = v.uv;
-				return o;
-			}
-			
-			sampler2D _MainTex;
+     void vert (inout appdata_full v, out Input o)
+     {
+         UNITY_INITIALIZE_OUTPUT(Input,o);
+         o.color = v.color; // Save the Vertex Color in the Input for the surf() method
+				 o.uv = v.texcoord;
+     }
 
-			fixed4 frag (v2f i) : SV_Target
-			{
-				fixed4 col = tex2D(_MainTex, i.uv);
-				// just invert the colors
-				col = 1 - col;
-				return col;
-			}
-			ENDCG
-		}
-	}
+		 uniform fixed _bwBlend;
+		 uniform sampler2D _MainTex;
+
+     void surf (Input IN, inout SurfaceOutputStandard o)
+     {
+         // Albedo comes from a texture tinted by color
+         fixed4 c = IN.color;
+
+//				 fixed lum = (c.r*.3 + c.g*.59 + c.b*.11);
+//				 fixed3 bw = fixed3( lum, lum, lum );
+
+//         o.Albedo = lerp(c.rgb, bw, _bwBlend);
+		     o.Albedo = c.rgb;
+
+         o.Alpha = c.a;
+
+     }
+     ENDCG
+ }
+ FallBack "Diffuse"
 }
