@@ -13,11 +13,13 @@ public class MovementSystem : MonoBehaviour {
   };
   MemoryComponent memComponent;
   SpriteRenderer spriteRenderer;
+  Animator animator;
 
   // Use this for initialization
   void Start() {
     memComponent   = GetComponent<MemoryComponent> ();
     spriteRenderer = GetComponent<SpriteRenderer>();
+    animator       = GetComponent<Animator>();
   }
 
   // Update is called once per frame
@@ -38,7 +40,7 @@ public class MovementSystem : MonoBehaviour {
       transform.position =
         MapGenerator.PositionFor(memComponent.position, -1);
 
-      transform.rotation = directions[memComponent.position.third];
+      animator.SetInteger("Direction", memComponent.position.third);
       break;
 
     case Memory.MemoryEvent.appearing:
