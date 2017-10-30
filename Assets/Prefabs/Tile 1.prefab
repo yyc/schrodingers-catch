@@ -192,8 +192,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1020410446670712}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.000000023981556, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.000000023981556, z: -1}
   m_LocalScale: {x: 0.33335036, y: 0.33335036, z: 0.30001917}
   m_Children: []
   m_Father: {fileID: 4682030838807838}
@@ -305,7 +305,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473220675650164}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.42700008, y: -0.000000023981556, z: 0}
   m_LocalScale: {x: 0.33335036, y: 0.33335036, z: 0.30001917}
   m_Children: []
@@ -371,6 +371,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0df83a285b1f7421b9e699dd9cb80ddf, type: 3}
   wallSprite: {fileID: 21300000, guid: cfdfad5c68bee4bf68dfe86e52932d4d, type: 3}
   pathSprite: {fileID: 21300000, guid: f9fc8b16dbcf14295b012f194f2ef6f7, type: 3}
+  portalSprite: {fileID: 21300000, guid: 54ca29e6c7d4443e5b3bb18a07782689, type: 3}
   cornerSprites:
   - {fileID: 21300000, guid: 0b111dd239026447994e337e987280ea, type: 3}
   - {fileID: 21300000, guid: f994c603f880c478f8db4252e8685831, type: 3}

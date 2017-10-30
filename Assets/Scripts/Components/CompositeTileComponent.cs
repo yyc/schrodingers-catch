@@ -8,6 +8,7 @@ public class CompositeTileComponent : MonoBehaviour {
   public Sprite[] walledSprites;
   public Sprite wallSprite;
   public Sprite pathSprite;
+  public Sprite portalSprite;
 
   // These are for if the adjacent walls are 0, but the corner is 1
   public Sprite[] cornerSprites;
@@ -40,9 +41,13 @@ public class CompositeTileComponent : MonoBehaviour {
         tileObjects[i].GetComponent<SpriteRenderer>().sprite = wallSprite;
       }
       return;
-    } else {
+    } else if (center == 2) {
+      tileObjects[4].GetComponent<SpriteRenderer>().sprite = portalSprite;
+    }
+    else {
       tileObjects[4].GetComponent<SpriteRenderer>().sprite = pathSprite;
     }
+
 
     // Otherwise, it's a path and we need to check the corners
     for (int i = 0; i < 4; i++) {
