@@ -133,8 +133,12 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.state    = Memory.MemoryEvent.disappearing;
     currentPlayer.GetComponent<MovementSystem>().startTransition(transitionTime);
 
-    Renderer rend = currentPlayer.GetComponent<Renderer>();
-    rend.material.SetFloat("_bwBlend", 1);
+    foreach (Transform child in currentPlayer.transform) {
+      if (child.CompareTag("Animator")) {
+        Renderer rend = child.GetComponent<Renderer>();
+        rend.material.SetFloat("_bwBlend", 1);
+      }
+    }
   }
 
   void willStartWalking() {
@@ -146,8 +150,12 @@ public class PlayerControllerSystem : MonoBehaviour {
     currentPlayer = newPlayer;
     memComponent  = newMemoryComponent;
 
-    Renderer rend = currentPlayer.GetComponent<Renderer>();
-    rend.material.SetFloat("_bwBlend", 0);
+    foreach (Transform child in currentPlayer.transform) {
+      if (child.CompareTag("Animator")) {
+        Renderer rend = child.GetComponent<Renderer>();
+        rend.material.SetFloat("_bwBlend", 0);
+      }
+    }
 
     memComponent.state    = Memory.MemoryEvent.appearing;
     memComponent.progress = 0.1f;
