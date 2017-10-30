@@ -226,7 +226,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 63f59c2477cc6461ca65b952085e8d28, type: 3}
   tilePrefab: {fileID: 1855216108358794, guid: 56d93ff6410d2462a87f79009b1238b9, type: 2}
   character: {fileID: 5567372}
-  mapFile: newmaze.csv
+  mapFile: newermaze.csv
 --- !u!4 &767446456
 Transform:
   m_ObjectHideFlags: 0
