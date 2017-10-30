@@ -11,6 +11,14 @@ public class MovementSystem : MonoBehaviour {
     Quaternion.AngleAxis(180, new Vector3(0, 0, 1)),
     Quaternion.AngleAxis(270, new Vector3(0, 0, 1))
   };
+  public static Quaternion[] inverses =  new Quaternion[4] { // [right, up,
+                                                             // left, down]
+    Quaternion.AngleAxis(0, new Vector3(0, 0, 1)),
+    Quaternion.AngleAxis(270, new Vector3(0, 0, 1)),
+    Quaternion.AngleAxis(180, new Vector3(0, 0, 1)),
+    Quaternion.AngleAxis(90, new Vector3(0, 0, 1))
+  };
+
   MemoryComponent memComponent;
   SpriteRenderer spriteRenderer;
   Animator animator;
@@ -19,7 +27,10 @@ public class MovementSystem : MonoBehaviour {
   void Start() {
     memComponent   = GetComponent<MemoryComponent> ();
     spriteRenderer = GetComponent<SpriteRenderer>();
-    animator       = GetComponent<Animator>();
+
+    foreach (Transform child in transform) {
+      if (child.CompareTag("Animator")) animator = child.GetComponent<Animator>();
+    }
   }
 
   // Update is called once per frame
@@ -40,7 +51,13 @@ public class MovementSystem : MonoBehaviour {
       transform.position =
         MapGenerator.PositionFor(memComponent.position, -1);
 
-      animator.SetInteger("Direction", memComponent.position.third);
+      int rotation = memComponent.position.third;
+
+      if (animator != null) {
+        animator.SetInteger("Direction", memComponent.position.third);
+        animator.transform.rotation = Quaternion.identity;
+      }
+      transform.rotation = directions[rotation];
       break;
 
     case Memory.MemoryEvent.appearing:
