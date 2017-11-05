@@ -19,7 +19,7 @@ public class PlayerControllerSystem : MonoBehaviour {
   private Timekeeper timekeeper;
   private MemoryComponent memComponent;
   private float lastPressTime = 0f;
-
+  private ChargeComponent chargeComponent;
 
   public enum State {
     walking,
@@ -32,7 +32,8 @@ public class PlayerControllerSystem : MonoBehaviour {
   {
     // Get and store a reference to the Rigidbody2D component so that we can
     // access it.
-    memComponent = currentPlayer.GetComponent<MemoryComponent> ();
+    memComponent    = currentPlayer.GetComponent<MemoryComponent> ();
+    chargeComponent = GetComponent<ChargeComponent> ();
   }
 
   void Awake() {}
@@ -56,7 +57,7 @@ public class PlayerControllerSystem : MonoBehaviour {
     switch (state) {
     case State.walking:
 
-      if (travel) {
+      if (travel && (chargeComponent.chargesLeft >= 1)) {
         lastPressTime = timekeeper.getTime();
         willStartTraveling();
       }
@@ -87,27 +88,9 @@ public class PlayerControllerSystem : MonoBehaviour {
       }
       break;
 
-    case State.traveling:
-
-      if (travel) {
-        lastPressTime = timekeeper.getTime();
-        willStartWalking();
-      }
-
-      // Store the current horizontal input in the float moveHorizontal.
-      float moveTime = Input.GetAxis("Horizontal");
-
-      if (moveTime != 0) {
-        lastPressTime = timekeeper.getTime();
-        timekeeper.immediateOffset(0.1f * moveTime);
-      }
-
-      break;
-
     // Handle transitions
     case State.transitioning:
-      float deltaTime = timekeeper.getTime() - lastPressTime;
-      memComponent.progress = deltaTime / transitionTime;
+      memComponent.progress += Time.deltaTime / transitionTime;
 
       if (memComponent.progress < 1) {
         return;
@@ -127,7 +110,7 @@ public class PlayerControllerSystem : MonoBehaviour {
     }
   }
 
-  void willStartTraveling() {
+  public void willStartTraveling() {
     state                 = State.transitioning;
     memComponent.progress = 0;
     memComponent.state    = Memory.MemoryEvent.disappearing;
@@ -141,7 +124,7 @@ public class PlayerControllerSystem : MonoBehaviour {
     }
   }
 
-  void willStartWalking() {
+  public void willStartWalking() {
     GameObject newPlayer = Instantiate(currentPlayer);
 
     MemoryComponent newMemoryComponent =
@@ -156,6 +139,8 @@ public class PlayerControllerSystem : MonoBehaviour {
         rend.material.SetFloat("_bwBlend", 0);
       }
     }
+
+    lastPressTime = timekeeper.getTime();
 
     memComponent.state    = Memory.MemoryEvent.appearing;
     memComponent.progress = 0.1f;
@@ -188,6 +173,7 @@ public class PlayerControllerSystem : MonoBehaviour {
 
     state = State.traveling;
     timekeeper.startRewind();
+    chargeComponent.chargesLeft--;
   }
 
   void startWalking() {

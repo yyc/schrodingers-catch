@@ -7,8 +7,8 @@ public class WaveControllerSystem : MonoBehaviour {
   public float secondsBetweenWaves = 3.0f;
   public int wave                  = 0;
 
-  private float nextSpawnTime = 1.5f;
-  private float waveStartTime = 0;
+  public float nextSpawnTime = 1.5f;
+  public float waveStartTime = 0;
   private EnemySpawnSystem spawnSystem;
   private Timekeeper timekeeper;
 
