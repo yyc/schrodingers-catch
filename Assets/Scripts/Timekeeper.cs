@@ -48,7 +48,7 @@ public class Timekeeper : MonoBehaviour {
     tick = Mathf.FloorToInt(time * 16);
 
     if (timerText != null) {
-      timerText.text = time.ToString();
+      timerText.text = (Mathf.Round(time * 100f) / 100f).ToString();
     }
   }
 
