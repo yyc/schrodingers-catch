@@ -21,23 +21,18 @@ public class WaveControllerSystem : MonoBehaviour {
     if (timekeeper.getTime() > nextSpawnTime) {
       waveStartTime = nextSpawnTime + 0.5f;
       nextSpawnTime = 99999999999999;
-      Debug.Log("started spawn");
       spawnSystem.Spawn(wave++);
-      Debug.Log("finished spawn");
     } else if ((NumEnemies() > 0) || (timekeeper.getTime() < waveStartTime)) {
       Debug.Log(NumEnemies());
       return;
     } else {
       nextSpawnTime = Mathf.Min(nextSpawnTime,
                                 timekeeper.getTime() + secondsBetweenWaves);
-      Debug.Log("scheduled next spawn for " + nextSpawnTime);
     }
   }
 
   int NumEnemies() {
     int num = 0;
-
-    Debug.Log(spawnSystem.currentEnemies.Count + " enemies present");
 
     foreach (GameObject enemy in spawnSystem.currentEnemies) {
       if (enemy.GetComponent<MemoryComponent>().IsActive()) {
