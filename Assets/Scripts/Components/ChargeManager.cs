@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChargeManager : MonoBehaviour {
   public int numCharges = 4;
@@ -8,6 +9,8 @@ public class ChargeManager : MonoBehaviour {
   // For positioning purposes
   public GameObject firstBar;
   public GameObject secondBar;
+  public Sprite filledBar;
+  public Sprite emptyBar;
 
 
   private int numVisible = 0;
@@ -42,11 +45,13 @@ public class ChargeManager : MonoBehaviour {
       Transform bar = transform.GetChild(i);
 
       if (i < numCharges) {
-        bar.gameObject.SetActive(true);
-        bar.position = barStart + new Vector3(barSpacing * i, 0, 0);
+        bar.GetComponent<Image>().sprite = filledBar;
+        bar.position                     = barStart + new Vector3(barSpacing * i,
+                                                                  0,
+                                                                  0);
         numVisible++;
       } else {
-        bar.gameObject.SetActive(false);
+        bar.GetComponent<Image>().sprite = emptyBar;
       }
     }
   }
