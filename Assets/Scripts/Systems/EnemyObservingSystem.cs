@@ -38,8 +38,6 @@ public class EnemyObservingSystem : MonoBehaviour {
 
       memComponent.SetInactive();
       GetComponent<MemorySystem>().ImmediateSave();
-
-      spawnSystem.Despawned(this.gameObject);
     }
   }
 

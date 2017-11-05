@@ -4,7 +4,6 @@ using UnityEngine;
 using Unitilities.Tuples;
 
 public class EnemySpawnSystem : MonoBehaviour {
-  public int currentEnemies = 0;
   public GameObject enemyPrefab;
 
   int wave            = 0;
@@ -13,6 +12,8 @@ public class EnemySpawnSystem : MonoBehaviour {
 
   // Minimum distance from a portal
   public int minimumSpawnDistance = 10;
+
+  public List<GameObject>currentEnemies = new List<GameObject>();
 
   public Sprite[] enemySprites;
 
@@ -38,27 +39,20 @@ public class EnemySpawnSystem : MonoBehaviour {
     }
   }
 
-  public void Despawned(GameObject enemy) {
-    currentEnemies--;
-  }
-
   // Update is called once per frame
-  void Update() {
-    if (currentEnemies > 0) {
-      return;
-    } else if (nextSpawnTime < 0) {
-      nextSpawnTime = Timekeeper.getInstance().maxTime;
-    } else if (Timekeeper.getInstance().getTime() > nextSpawnTime) {
-      // Increment 1 as a mutex to prevent this from running multiple times
-      currentEnemies++;
-      Spawn(waves[Mathf.Min(waves.Count - 1, wave)]);
-      nextSpawnTime = -1.0f;
-      wave++;
-    }
+  void        Update() {}
+
+  public void Spawn(int wave) {
+    Spawn(waves[wave]);
   }
 
-  void Spawn(int[] enemies) {
+  public void Spawn(int[] enemies) {
     Timekeeper timekeeper = Timekeeper.getInstance();
+
+    foreach (GameObject enemy in currentEnemies) {
+      Destroy(enemy, 1.0f);
+    }
+    currentEnemies.Clear();
 
     int spritesLength = enemySprites.Length;
     int spriteIndex   = Random.Range(0, spritesLength);
@@ -69,14 +63,14 @@ public class EnemySpawnSystem : MonoBehaviour {
       TupleI observed    = new TupleI(0, enemies[i]);
 
       for (int j = 0; j < enemies[i]; j++) {
-        currentEnemies++;
-
         GameObject newEnemy = Instantiate(enemyPrefab,
                                           Vector3.zero,
                                           Quaternion.identity);
 
         twins[j]      = newEnemy;
         newEnemy.name = "Enemy-" + wave + "-" + i + "-" + j;
+
+        currentEnemies.Add(newEnemy);
 
         newEnemy.GetComponent<MemoryComponent>().position =
           randomValidPosition();
@@ -95,7 +89,6 @@ public class EnemySpawnSystem : MonoBehaviour {
 
       spriteIndex = (spriteIndex + 1) % spritesLength;
     }
-    currentEnemies--;
   }
 
   Tuple3I randomValidPosition() {

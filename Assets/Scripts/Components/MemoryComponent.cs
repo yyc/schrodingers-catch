@@ -65,4 +65,10 @@ public class MemoryComponent : MonoBehaviour {
       position = newPosition;
     }
   }
+
+  public bool IsActive() {
+    int time = Timekeeper.getInstance().getTick();
+
+    return time > firstActiveTick && time < lastActiveTick;
+  }
 }
