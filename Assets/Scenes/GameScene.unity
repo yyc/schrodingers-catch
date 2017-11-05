@@ -733,6 +733,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554986944}
+--- !u!114 &663119992 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114366124378028330, guid: d7d36fd3ddc294bf286fa9f8457fa879,
+    type: 2}
+  m_PrefabInternal: {fileID: 19665014}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &677010975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1866,7 @@ MonoBehaviour:
   wave: 0
   nextSpawnTime: 1.5
   waveStartTime: 0
+  enemyCountText: {fileID: 663119992}
 --- !u!114 &1913148771
 MonoBehaviour:
   m_ObjectHideFlags: 0
