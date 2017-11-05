@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: bdef9c7642db244baa0d952a1fea6d3e
+timeCreated: 1509723500
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: background panel_0
+    21300002: background panel_1
+    21300004: background panel_2
+    21300006: background panel_3
+    21300008: background panel_4
+    21300010: background panel_5
+    21300012: background panel_6
+    21300014: background panel_7
+    21300016: background panel_8
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 94, y: 91, z: 81, w: 124}
+  spritePixelsToUnits: 300
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: background panel_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 533
+        width: 235
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_1
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 532
+        width: 353
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_2
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 532
+        width: 182
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 227
+        width: 237
+        height: 304
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 237
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 332
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 0, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_6
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 0
+        width: 197
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 0, z: 0, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_7
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 220
+        width: 194
+        height: 311
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: background panel_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 771
+        height: 771
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline:
+    - - {x: 379.5, y: -377.5}
+      - {x: 379.5, y: -372.5}
+      - {x: 385.5, y: -372.5}
+      - {x: 385.5, y: 363.5}
+      - {x: 379.5, y: 363.5}
+      - {x: 379.5, y: 376.5}
+      - {x: 377.5, y: 378.5}
+      - {x: 372.5, y: 378.5}
+      - {x: 372.5, y: 384.5}
+      - {x: 371.5, y: 385.5}
+      - {x: -362.5, y: 385.5}
+      - {x: -363.5, y: 384.5}
+      - {x: -363.5, y: 378.5}
+      - {x: -376.5, y: 378.5}
+      - {x: -378.5, y: 376.5}
+      - {x: -378.5, y: 371.5}
+      - {x: -384.5, y: 371.5}
+      - {x: -385.5, y: 370.5}
+      - {x: -385.5, y: -371.5}
+      - {x: -384.5, y: -372.5}
+      - {x: -378.5, y: -372.5}
+      - {x: -378.5, y: -377.5}
+      - {x: -376.5, y: -379.5}
+      - {x: -371.5, y: -379.5}
+      - {x: -371.5, y: -385.5}
+      - {x: 372.5, y: -385.5}
+      - {x: 372.5, y: -379.5}
+      - {x: 377.5, y: -379.5}
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
