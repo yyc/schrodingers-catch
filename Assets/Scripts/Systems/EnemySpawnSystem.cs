@@ -82,9 +82,10 @@ public class EnemySpawnSystem : MonoBehaviour {
 
         EnemyObservingSystem observer =
           newEnemy.GetComponent<EnemyObservingSystem>();
-        observer.twins       = twins;
-        observer.observed    = observed;
-        observer.spawnSystem = this;
+        observer.twins           = twins;
+        observer.observed        = observed;
+        observer.spawnSystem     = this;
+        observer.chargeComponent = GetComponent<ChargeComponent>();
       }
 
       spriteIndex = (spriteIndex + 1) % spritesLength;

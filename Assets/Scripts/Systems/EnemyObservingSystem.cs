@@ -9,6 +9,7 @@ public class EnemyObservingSystem : MonoBehaviour {
   public EnemySpawnSystem spawnSystem;
 
   protected SpriteRenderer spriteRenderer;
+  public ChargeComponent chargeComponent;
 
   // Counts the number of observers and only updates the fraction when
   // Transitioning from unobserved
@@ -38,6 +39,7 @@ public class EnemyObservingSystem : MonoBehaviour {
 
       memComponent.SetInactive();
       GetComponent<MemorySystem>().ImmediateSave();
+      chargeComponent.chargesLeft++;
     }
   }
 
