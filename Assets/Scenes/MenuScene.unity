@@ -510,8 +510,30 @@ Prefab:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 114715556676980850, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114374714519889674, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114660274053968794, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114363432942179618, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114174245152551414, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &531452600 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1476826108245632, guid: f8b08ccec457143f4addf704172cb9a3,
+    type: 2}
+  m_PrefabInternal: {fileID: 531452599}
+--- !u!114 &531452601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 531452600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5beac8f3bfa84950bdfd036b7dd877a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionScene: InstructionsScene
 --- !u!1 &556877272
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +854,12 @@ Prefab:
       propertyPath: transitionScene
       value: CreditsScene
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114715556676980850, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114374714519889674, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114660274053968794, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114363432942179618, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114174245152551414, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1061716943
@@ -991,6 +1018,11 @@ Prefab:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 114715556676980850, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114374714519889674, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114660274053968794, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114363432942179618, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+    - {fileID: 114174245152551414, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1283429466
@@ -1377,3 +1409,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2013554645}
+--- !u!1 &2086517149 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1476826108245632, guid: f8b08ccec457143f4addf704172cb9a3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1040882287}
+--- !u!114 &2086517150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2086517149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5beac8f3bfa84950bdfd036b7dd877a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionScene: CreditsScene
