@@ -53,6 +53,9 @@ public class EnemyObservingSystem : MonoBehaviour {
         observed.first += 1;
       }
       observerCount++;
+    } else if (other.gameObject.CompareTag("Portal")) {
+      Debug.Log("Game Over, man, Game Over");
+      GameOverSystem.GameOver();
     }
   }
 

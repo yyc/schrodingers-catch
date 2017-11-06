@@ -42,6 +42,10 @@ public class WaveControllerSystem : MonoBehaviour {
   int NumEnemies() {
     int num = 0;
 
+    if (spawnSystem == null) {
+      spawnSystem = GetComponent<EnemySpawnSystem>();
+    }
+
     foreach (GameObject enemy in spawnSystem.currentEnemies) {
       if (enemy.GetComponent<MemoryComponent>().IsActive()) {
         num++;
