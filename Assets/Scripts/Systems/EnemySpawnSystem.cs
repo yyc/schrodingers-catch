@@ -5,6 +5,7 @@ using Unitilities.Tuples;
 
 public class EnemySpawnSystem : MonoBehaviour {
   public GameObject enemyPrefab;
+  public TextAsset waveFile;
 
   int wave            = 0;
   int numWaves        = 0;
@@ -22,7 +23,7 @@ public class EnemySpawnSystem : MonoBehaviour {
   // Use this for initialization
   void Start() {
     nextSpawnTime = -1.0f;
-    string fileData = System.IO.File.ReadAllText("waves.txt");
+    string fileData = waveFile.text;
 
     string[] rows = fileData.Split("\n"[0]);
     numWaves = rows.Length;

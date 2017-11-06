@@ -568,7 +568,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 63f59c2477cc6461ca65b952085e8d28, type: 3}
   tilePrefab: {fileID: 1855216108358794, guid: 56d93ff6410d2462a87f79009b1238b9, type: 2}
   character: {fileID: 180474104}
-  mapFile: menumap.csv
+  mapFile: {fileID: 4900000, guid: 8df9f3aed6fed4d8fbb9be490324b292, type: 3}
 --- !u!4 &556877274
 Transform:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4138610069767190, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.89
+      value: 4.77
       objectReference: {fileID: 0}
     - target: {fileID: 4138610069767190, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
       propertyPath: m_LocalPosition.y
@@ -854,6 +854,20 @@ Prefab:
       propertyPath: transitionScene
       value: CreditsScene
       objectReference: {fileID: 0}
+    - target: {fileID: 4138610069767190, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138610069767190, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 95947731413124690, guid: f8b08ccec457143f4addf704172cb9a3,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 20c4e886325f04445b9b189c913a7e01,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114715556676980850, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}
     - {fileID: 114374714519889674, guid: f8b08ccec457143f4addf704172cb9a3, type: 2}

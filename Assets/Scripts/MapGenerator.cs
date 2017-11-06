@@ -12,7 +12,7 @@ public class MapGenerator : MonoBehaviour {
   public static string maze_filename = "maze.csv";
   public static List<TupleI>portalLocations = new List<TupleI>();
   public static int numRows, numCols, gridRows, gridCols;
-  public string mapFile = "maze.csv";
+  public TextAsset mapFile;
 
   private static float tileHeight = 0, tileWidth = 0, tileScale = 0;
   private static Vector3 mapOrigin = Vector3.zero;
@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour {
     portalLocations = new List<TupleI>();
 
     // Read in maze
-    string fileData = System.IO.File.ReadAllText(mapFile).Trim();
+    string fileData = mapFile.text;
 
     string[] rows = fileData.Split("\n"[0]);
     string[] cols = rows[0].Split(","[0]);
