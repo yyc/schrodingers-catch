@@ -42,7 +42,13 @@ public class CompositeTileComponent : MonoBehaviour {
       }
       return;
     } else if (center == 2) {
-      tileObjects[4].GetComponent<SpriteRenderer>().sprite = portalSprite;
+      BoxCollider2D collider = GetComponent<BoxCollider2D>();
+      collider.isTrigger = true;
+
+      gameObject.tag = "Portal";
+
+      tileObjects[4].GetComponent<SpriteRenderer>().sprite =
+        portalSprite;
     }
     else {
       tileObjects[4].GetComponent<SpriteRenderer>().sprite = pathSprite;
