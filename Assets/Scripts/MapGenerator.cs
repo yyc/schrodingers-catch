@@ -106,7 +106,9 @@ public class MapGenerator : MonoBehaviour {
   }
 
   private Vector3 TilePositionFor(int row, int col, float z = 0) {
-    return mapOrigin + new Vector3(col * tileHeight, row * tileWidth, z);
+    return mapOrigin + new Vector3(0.99f * col * tileHeight,
+                                   0.99f * row * tileWidth,
+                                   z);
   }
 
   public static Vector3 PositionFor(Tuple3I tuple, float z = 0) {
@@ -118,7 +120,9 @@ public class MapGenerator : MonoBehaviour {
   }
 
   public static Vector3 PositionFor(int row, int col, float z = 0) {
-    return mapOrigin + new Vector3(col * tileHeight, row * tileWidth, z);
+    return mapOrigin + new Vector3(0.99f * col * tileHeight,
+                                   0.99f * row * tileWidth,
+                                   z);
   }
 
   public static bool isValidMove(TupleI old, TupleI newPosition) {
