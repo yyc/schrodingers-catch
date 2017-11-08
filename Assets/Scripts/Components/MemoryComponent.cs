@@ -63,6 +63,13 @@ public class MemoryComponent : MonoBehaviour {
 
     if (MapGenerator.isValidMove(position, newPosition)) {
       position = newPosition;
+    } else {
+      // Even if it's not a valid move, we can still turn in that direction
+      position = new Tuple3I(
+        position.first,
+        position.second,
+        thirdValue
+        );
     }
   }
 
