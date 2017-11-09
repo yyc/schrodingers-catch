@@ -111,6 +111,17 @@ public class MapGenerator : MonoBehaviour {
                                    z);
   }
 
+  public static Vector3 PositionFor(Tuple3I src,
+                                    Tuple3I dest,
+                                    float   progress,
+                                    float   z = 0) {
+    Vector3 srcPos = PositionFor(src, z);
+
+    Vector3 destPos = PositionFor(dest, z);
+
+    return Vector3.Lerp(srcPos, destPos, progress);
+  }
+
   public static Vector3 PositionFor(Tuple3I tuple, float z = 0) {
     return PositionFor(tuple.first, tuple.second, z);
   }
@@ -133,6 +144,10 @@ public class MapGenerator : MonoBehaviour {
   }
 
   public static bool isValidMove(Tuple3I old, Tuple3I newPosition) {
+    if (old.third != newPosition.third) { // need to be in the correct direction
+      Debug.Log("Not in right direction!");
+      return false;
+    }
     return isValidMove(old.first,
                        old.second,
                        newPosition.first,

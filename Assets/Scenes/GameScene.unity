@@ -1153,7 +1153,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 767446454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.31, y: 0.5, z: -8.0546875}
+  m_LocalPosition: {x: 0.31, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2464,7 +2464,7 @@ MonoBehaviour:
   speed: 1
   underControl: 1
   currentPlayer: {fileID: 5567372}
-  cooldown: 0.1
+  cooldown: 0.15
   transitionTime: 0.2
   state: 0
   playerPrefab: {fileID: 1703424125306958, guid: d72f04a75ee644604972ade0d007beda,
@@ -2496,7 +2496,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1913148765}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de8174609c1224cfd9d06e242a1fc70d, type: 3}
   m_Name: 
@@ -3014,6 +3014,34 @@ Prefab:
         type: 2}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
       value: -0.29604673
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535751646732782, guid: ad654aa5ac29f498b90be6fbfa25db63,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129522913957074, guid: ad654aa5ac29f498b90be6fbfa25db63,
+        type: 2}
+      propertyPath: firstActiveTick
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947481019449020, guid: ad654aa5ac29f498b90be6fbfa25db63, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466727494183430, guid: ad654aa5ac29f498b90be6fbfa25db63, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129522913957074, guid: ad654aa5ac29f498b90be6fbfa25db63,
+        type: 2}
+      propertyPath: destPosition.first
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129522913957074, guid: ad654aa5ac29f498b90be6fbfa25db63,
+        type: 2}
+      propertyPath: destPosition.second
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad654aa5ac29f498b90be6fbfa25db63, type: 2}
