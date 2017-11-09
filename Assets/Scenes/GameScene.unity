@@ -2464,7 +2464,7 @@ MonoBehaviour:
   speed: 1
   underControl: 1
   currentPlayer: {fileID: 5567372}
-  cooldown: 0.1
+  cooldown: 0.15
   transitionTime: 0.2
   state: 0
   playerPrefab: {fileID: 1703424125306958, guid: d72f04a75ee644604972ade0d007beda,

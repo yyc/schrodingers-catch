@@ -119,7 +119,7 @@ public class MapGenerator : MonoBehaviour {
 
     Vector3 destPos = PositionFor(dest, z);
 
-    return destPos * progress + srcPos * (1.0f - progress);
+    return Vector3.Lerp(srcPos, destPos, progress);
   }
 
   public static Vector3 PositionFor(Tuple3I tuple, float z = 0) {
@@ -144,6 +144,10 @@ public class MapGenerator : MonoBehaviour {
   }
 
   public static bool isValidMove(Tuple3I old, Tuple3I newPosition) {
+    if (old.third != newPosition.third) { // need to be in the correct direction
+      Debug.Log("Not in right direction!");
+      return false;
+    }
     return isValidMove(old.first,
                        old.second,
                        newPosition.first,

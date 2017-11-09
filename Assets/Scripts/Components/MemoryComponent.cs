@@ -60,6 +60,19 @@ public class MemoryComponent : MonoBehaviour {
     memory = new Memory(Memory.MemoryEvent.inactive, pos);
   }
 
+  public void turnTowards(int thirdValue) {
+    position = new Tuple3I(
+      position.first,
+      position.second,
+      thirdValue
+      );
+    destPosition = new Tuple3I(
+      destPosition.first,
+      destPosition.second,
+      thirdValue
+      );
+  }
+
   public void deltaPosition(int firstDelta, int secondDelta, int thirdValue) {
     // Check for validity of new position here
 
@@ -69,16 +82,12 @@ public class MemoryComponent : MonoBehaviour {
       thirdValue
       );
 
+    // Even if it's not a valid move, we can still turn in that direction
+
     if (MapGenerator.isValidMove(position, newPosition)) {
       destPosition = newPosition;
       progress     = 0f;
     } else {
-      // Even if it's not a valid move, we can still turn in that direction
-      position = new Tuple3I(
-        position.first,
-        position.second,
-        thirdValue
-        );
       destPosition = position;
     }
   }

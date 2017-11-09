@@ -58,7 +58,7 @@ public class Memory : Tuple4<int, Tuple3I, Tuple3I, float>{
     Memory newMemory = new Memory(this.first,
                                   this.second,
                                   this.third,
-                                  this.fourth += amount);
+                                  Mathf.Min(1.0f, this.fourth += amount));
     return newMemory;
   }
 }
