@@ -136,18 +136,18 @@ public class MapGenerator : MonoBehaviour {
                                    z);
   }
 
-  public static bool isValidMove(TupleI old, TupleI newPosition) {
+  public static bool isValidMove(Tuple3I old, Tuple3I newPosition) {
+    if (old.third != newPosition.third) { // need to be in the correct direction
+      Debug.Log("Not in right direction!");
+      return false;
+    }
     return isValidMove(old.first,
                        old.second,
                        newPosition.first,
                        newPosition.second);
   }
 
-  public static bool isValidMove(Tuple3I old, Tuple3I newPosition) {
-    if (old.third != newPosition.third) { // need to be in the correct direction
-      Debug.Log("Not in right direction!");
-      return false;
-    }
+  public static bool isValidMove(TupleI old, TupleI newPosition) {
     return isValidMove(old.first,
                        old.second,
                        newPosition.first,
