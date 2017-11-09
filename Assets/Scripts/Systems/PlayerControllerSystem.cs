@@ -40,7 +40,7 @@ public class PlayerControllerSystem : MonoBehaviour {
 
   // FixedUpdate is called at a fixed interval and is independent of frame rate.
   // Put physics code here.
-  void Update()
+  void FixedUpdate()
   {
     if (timekeeper == null) {
       timekeeper = Timekeeper.getInstance();
@@ -50,7 +50,6 @@ public class PlayerControllerSystem : MonoBehaviour {
       return;
     }
 
-    // only accept input after a cooldown
 
     bool travel = Input.GetKeyUp("space");
 
@@ -62,29 +61,42 @@ public class PlayerControllerSystem : MonoBehaviour {
         willStartTraveling();
       }
 
-      if (timekeeper.getTime() - lastPressTime < cooldown) {
+      // only accept input after a cooldown
+      if ((timekeeper.getTime() - lastPressTime) < cooldown) {
+        // walking.progress
+        memComponent.advance(Time.deltaTime / cooldown);
         return;
       }
+      memComponent.position = memComponent.destPosition;
+      memComponent.progress = 0;
 
       // Store the current horizontal input in the float moveHorizontal.
-      int moveHorizontal = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
+      float horizontalAxis = Input.GetAxis("Horizontal");
 
       // Store the current vertical input in the float moveVertical.
-      int moveVertical = Mathf.RoundToInt(Input.GetAxis("Vertical"));
+      float verticalAxis = Input.GetAxis("Vertical");
 
+      if (horizontalAxis != 0) {
+        int moveHorizontal = (horizontalAxis > 0) ? 1 : -1;
+        memComponent.turnTowards(1 - moveHorizontal);
 
-      if (moveHorizontal != 0) {
-        lastPressTime = timekeeper.getTime();
+        if ((horizontalAxis >= 1.0f) || (horizontalAxis <= -1.0f)) {
+          lastPressTime = timekeeper.getTime();
 
-        // direction = 1 if right (moveHorizontal  =1)
-        // direction = 3 if left (moveHorizontal = -1)
-        memComponent.deltaPosition(0, moveHorizontal, 1 - moveHorizontal);
-      } else if (moveVertical != 0) {
-        lastPressTime = timekeeper.getTime();
+          // direction = 1 if right (moveHorizontal  =1)
+          // direction = 3 if left (moveHorizontal = -1)
+          memComponent.deltaPosition(0, moveHorizontal, 1 - moveHorizontal);
+        }
+      } else if (verticalAxis != 0) {
+        int moveVertical = (verticalAxis > 0) ? 1 : -1;
+        memComponent.turnTowards(2 - moveVertical);
 
-        // direction = 2 if up (moveVertical  =1)
-        // direction = 4 if down (moveVertical = -1)
-        memComponent.deltaPosition(moveVertical, 0, 2 - moveVertical);
+        if ((verticalAxis >= 1.0f) || (verticalAxis <= -1.0f)) {
+          // direction = 2 if up (moveVertical  =1)
+          // direction = 4 if down (moveVertical = -1)
+          lastPressTime = timekeeper.getTime();
+          memComponent.deltaPosition(moveVertical, 0, 2 - moveVertical);
+        }
       }
       break;
 
