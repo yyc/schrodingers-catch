@@ -11,11 +11,14 @@ public class SceneButtonComponent : MonoBehaviour {
   void Start() {
     Button btn = GetComponent<Button>();
 
+    Debug.Log("initialized");
     btn.onClick.AddListener(TransitionOnClick);
+    Debug.Log(btn);
   }
 
   // Update is called once per frame
   void TransitionOnClick() {
+    Debug.Log("clicked");
     SceneManager.LoadScene(sceneName);
   }
 }
