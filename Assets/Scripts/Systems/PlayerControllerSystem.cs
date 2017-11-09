@@ -50,7 +50,6 @@ public class PlayerControllerSystem : MonoBehaviour {
       return;
     }
 
-    // only accept input after a cooldown
 
     bool travel = Input.GetKeyUp("space");
 
@@ -62,11 +61,14 @@ public class PlayerControllerSystem : MonoBehaviour {
         willStartTraveling();
       }
 
-      if (timekeeper.getTime() - lastPressTime < cooldown) {
+      // only accept input after a cooldown
+      if ((timekeeper.getTime() - lastPressTime) < cooldown) {
         // walking.progress
         memComponent.advance(Time.deltaTime / cooldown);
         return;
       }
+      memComponent.position = memComponent.destPosition;
+      memComponent.progress = 0;
 
       // Store the current horizontal input in the float moveHorizontal.
       int moveHorizontal = Mathf.RoundToInt(Input.GetAxis("Horizontal"));

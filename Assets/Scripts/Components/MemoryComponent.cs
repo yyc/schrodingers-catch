@@ -79,11 +79,13 @@ public class MemoryComponent : MonoBehaviour {
         position.second,
         thirdValue
         );
+      destPosition = position;
     }
   }
 
   public void advance(float x) {
-    memory = memory.advance(x);
+    memory   = memory.advance(x);
+    progress = memory.progress();
   }
 
   public bool IsActive() {

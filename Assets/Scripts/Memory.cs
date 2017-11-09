@@ -11,14 +11,6 @@ public class Memory : Tuple4<int, Tuple3I, Tuple3I, float>{
     inactive,     // tuple holds position (x, y, orientation)
   };
 
-  public Memory(MemoryEvent memEvent, int row, int col, int orientation) :
-    base(
-      (int)memEvent,
-      new Tuple3I(row, col, orientation),
-      new Tuple3I(row, col, orientation),
-      0)
-  {}
-
   public Memory(MemoryEvent memEvent, float progress) :
     base(
       (int)memEvent,
@@ -27,6 +19,10 @@ public class Memory : Tuple4<int, Tuple3I, Tuple3I, float>{
       progress
       )
   {}
+
+  public Memory(MemoryEvent memEvent, Tuple3I second, Tuple3I third,
+                float fourth) :
+    base((int)memEvent, second, third, fourth) {}
 
   public Memory(int first, Tuple3I second, Tuple3I third, float fourth) :
     base(first, second, third, fourth) {}

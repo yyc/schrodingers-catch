@@ -40,7 +40,7 @@ public class MovementSystem : MonoBehaviour {
     // If it's before or after the active period, byebye
     if ((tick < memComponent.firstActiveTick) ||
         (tick > memComponent.lastActiveTick)) {
-      transform.position = new Vector3(-100, -100, 0);
+      transform.position = new Vector3(-100, -100, -10);
       return;
     }
 
@@ -49,7 +49,7 @@ public class MovementSystem : MonoBehaviour {
     switch (memComponent.state) {
     case Memory.MemoryEvent.reposition:
 
-      if (memComponent.position = memComponent.destPosition) {
+      if (memComponent.position == memComponent.destPosition) {
         // Staying still;
         transform.position =
           MapGenerator.PositionFor(memComponent.position, -1);
