@@ -63,6 +63,8 @@ public class PlayerControllerSystem : MonoBehaviour {
       }
 
       if (timekeeper.getTime() - lastPressTime < cooldown) {
+        // walking.progress
+        memComponent.advance(Time.deltaTime / cooldown);
         return;
       }
 

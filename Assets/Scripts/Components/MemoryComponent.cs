@@ -5,6 +5,7 @@ using Unitilities.Tuples;
 
 public class MemoryComponent : MonoBehaviour {
   public Tuple3I position;
+  public Tuple3I destPosition;
   public Memory.MemoryEvent state;
   public float progress = 0;
   public Memory memory;
@@ -17,6 +18,9 @@ public class MemoryComponent : MonoBehaviour {
 
   // Use this for initialization
   void Awake() {
+    if (destPosition == null) {
+      destPosition = position;
+    }
     state          = Memory.MemoryEvent.reposition;
     hashtable      = new Hashtable();
     lastActiveTick = 160000;
@@ -26,7 +30,10 @@ public class MemoryComponent : MonoBehaviour {
   void FixedUpdate() {
     if (isSaving == true) {
       if (state == Memory.MemoryEvent.reposition) {
-        memory = new Memory(Memory.MemoryEvent.reposition, position);
+        memory = new Memory(Memory.MemoryEvent.reposition,
+                            position,
+                            destPosition,
+                            progress);
       } else {
         memory = new Memory(state, progress);
       }
@@ -38,10 +45,11 @@ public class MemoryComponent : MonoBehaviour {
     }
     state = memory.memoryEvent();
 
+    progress = memory.progress();
+
     if (state == Memory.MemoryEvent.reposition) {
-      position = memory.position();
-    } else {
-      progress = memory.progress();
+      position     = memory.position();
+      destPosition = memory.destPosition();
     }
   }
 
@@ -62,7 +70,8 @@ public class MemoryComponent : MonoBehaviour {
       );
 
     if (MapGenerator.isValidMove(position, newPosition)) {
-      position = newPosition;
+      destPosition = newPosition;
+      progress     = 0f;
     } else {
       // Even if it's not a valid move, we can still turn in that direction
       position = new Tuple3I(
@@ -71,6 +80,10 @@ public class MemoryComponent : MonoBehaviour {
         thirdValue
         );
     }
+  }
+
+  public void advance(float x) {
+    memory = memory.advance(x);
   }
 
   public bool IsActive() {

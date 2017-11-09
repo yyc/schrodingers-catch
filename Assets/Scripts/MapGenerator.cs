@@ -111,6 +111,16 @@ public class MapGenerator : MonoBehaviour {
                                    z);
   }
 
+  public static Vector3 PositionFor(Tuple3I src,
+                                    Tuple3I dest,
+                                    float   progress,
+                                    float   z = 0) {
+    Vector3 srcPos  = PositionFor(src, z);
+    Vector3 destPos = PositionFor(dest, z);
+
+    return destPos * progress + srcPos * (1 - progress);
+  }
+
   public static Vector3 PositionFor(Tuple3I tuple, float z = 0) {
     return PositionFor(tuple.first, tuple.second, z);
   }
