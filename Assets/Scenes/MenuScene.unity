@@ -938,6 +938,21 @@ Prefab:
       propertyPath: position.third
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114129522913957074, guid: ad654aa5ac29f498b90be6fbfa25db63,
+        type: 2}
+      propertyPath: destPosition.first
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129522913957074, guid: ad654aa5ac29f498b90be6fbfa25db63,
+        type: 2}
+      propertyPath: destPosition.second
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129522913957074, guid: ad654aa5ac29f498b90be6fbfa25db63,
+        type: 2}
+      propertyPath: destPosition.third
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad654aa5ac29f498b90be6fbfa25db63, type: 2}
   m_IsPrefabParent: 0
