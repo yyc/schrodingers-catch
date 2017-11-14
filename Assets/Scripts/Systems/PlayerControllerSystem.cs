@@ -127,6 +127,7 @@ public class PlayerControllerSystem : MonoBehaviour {
     memComponent.progress = 0;
     memComponent.state    = Memory.MemoryEvent.disappearing;
     currentPlayer.GetComponent<MovementSystem>().startTransition(transitionTime);
+    currentPlayer.GetComponent<AudioSource>().Play();
 
     foreach (Transform child in currentPlayer.transform) {
       if (child.CompareTag("Animator")) {
