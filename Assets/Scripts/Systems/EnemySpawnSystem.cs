@@ -79,9 +79,8 @@ public class EnemySpawnSystem : MonoBehaviour {
         newEnemy.GetComponent<MemoryComponent>().firstActiveTick =
           timekeeper.getTick();
 
-        newEnemy.transform.GetChild(0).gameObject.GetComponent<Animator>().
-        runtimeAnimatorController =
-          enemyAnimators[spriteIndex];
+        newEnemy.GetComponent<AnimatorChildComponent>().animator.
+        runtimeAnimatorController = enemyAnimators[spriteIndex];
 
         EnemyObservingSystem observer =
           newEnemy.GetComponent<EnemyObservingSystem>();

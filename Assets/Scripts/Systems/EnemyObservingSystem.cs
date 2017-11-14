@@ -11,6 +11,9 @@ public class EnemyObservingSystem : MonoBehaviour {
   protected SpriteRenderer spriteRenderer;
   public ChargeComponent chargeComponent;
 
+  public Sprite disappearSprite;
+  public RuntimeAnimatorController disappearAnimation;
+
   // Counts the number of observers and only updates the fraction when
   // Transitioning from unobserved
   protected int observerCount = 0;
@@ -24,12 +27,12 @@ public class EnemyObservingSystem : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-    spriteRenderer.color = new Color(1,
-                                     1,
-                                     1, 1.0f -
-                                     (float)observed.first / observed.second);
+    if (spriteRenderer == null) {
+      return;
+    }
 
     if (observed.first == observed.second) {
+      spriteRenderer.color = new Color(1, 1, 1, 1.0f);
       int tick                     = Timekeeper.getInstance().getTick();
       MemoryComponent memComponent = GetComponent<MemoryComponent>();
 
@@ -41,7 +44,21 @@ public class EnemyObservingSystem : MonoBehaviour {
 
       memComponent.SetInactive();
       GetComponent<MemorySystem>().ImmediateSave();
+
+      memComponent.enabled                   = false;
+      GetComponent<MovementSystem>().enabled = false;
+      this.enabled                           = false;
+
+      GetComponent<AnimatorChildComponent>().animator.runtimeAnimatorController =
+        disappearAnimation;
+      spriteRenderer.sprite = disappearSprite;
+
       chargeComponent.chargesLeft++;
+    } else {
+      spriteRenderer.color = new Color(1,
+                                       1,
+                                       1, 1.0f -
+                                       (float)observed.first / observed.second);
     }
   }
 

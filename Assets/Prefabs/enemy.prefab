@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114363432942179618}
   - component: {fileID: 114174245152551414}
   - component: {fileID: 61278765068607094}
+  - component: {fileID: 114615181349490506}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -156,6 +157,8 @@ MonoBehaviour:
     second: 0
   spawnSystem: {fileID: 0}
   chargeComponent: {fileID: 0}
+  disappearSprite: {fileID: 21300000, guid: 0a4844d28bb4d4344948546cd79bcfcc, type: 3}
+  disappearAnimation: {fileID: 9100000, guid: 62b4dd36fd12b284787273f07df81286, type: 2}
 --- !u!114 &114363432942179618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,6 +183,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbee77ccd19554f808c58555bdf7ed28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114615181349490506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476826108245632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1626729cee0f24b509707828de1ec695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 95545217678466340}
 --- !u!114 &114660274053968794
 MonoBehaviour:
   m_ObjectHideFlags: 1
