@@ -10,10 +10,10 @@ public class EnemyControllerSystem : MonoBehaviour {
   private MemoryComponent memComponent;
 
   private static Tuple3I[] directions = new Tuple3I[4] {
-    new Tuple3I(1, 0, 1),  // right
     new Tuple3I(0, 1, 2),  // up
     new Tuple3I(-1, 0, 3), // left
-    new Tuple3I(0, -1, 4)  // down
+    new Tuple3I(0, -1, 4), // down
+    new Tuple3I(1, 0, 1),  // right
   };
 
   void Start() {
