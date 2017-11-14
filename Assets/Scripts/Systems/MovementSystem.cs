@@ -29,7 +29,10 @@ public class MovementSystem : MonoBehaviour {
     spriteRenderer = GetComponent<SpriteRenderer>();
 
     foreach (Transform child in transform) {
-      if (child.CompareTag("Animator")) animator = child.GetComponent<Animator>();
+      if (child.CompareTag("Animator")) {
+        spriteRenderer = child.GetComponent<SpriteRenderer>();
+        animator       = child.GetComponent<Animator>();
+      }
     }
   }
 
@@ -55,7 +58,9 @@ public class MovementSystem : MonoBehaviour {
           MapGenerator.PositionFor(memComponent.position, -1);
       } else { // Need to tween movement
         transform.position =
-          MapGenerator.PositionFor(memComponent.position, memComponent.destPosition, memComponent.progress);
+          MapGenerator.PositionFor(memComponent.position,
+                                   memComponent.destPosition,
+                                   memComponent.progress);
       }
 
 

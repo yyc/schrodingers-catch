@@ -17,7 +17,9 @@ public class EnemyObservingSystem : MonoBehaviour {
 
   // Use this for initialization
   void Start()  {
-    spriteRenderer = GetComponent<SpriteRenderer>();
+    foreach (Transform child in transform) {
+      spriteRenderer = child.GetComponent<SpriteRenderer>();
+    }
   }
 
   // Update is called once per frame

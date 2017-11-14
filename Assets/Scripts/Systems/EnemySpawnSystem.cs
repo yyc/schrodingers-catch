@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unitilities.Tuples;
+using UnityEditor.Animations;
 
 public class EnemySpawnSystem : MonoBehaviour {
   public GameObject enemyPrefab;
@@ -16,7 +17,7 @@ public class EnemySpawnSystem : MonoBehaviour {
 
   public List<GameObject>currentEnemies = new List<GameObject>();
 
-  public Sprite[] enemySprites;
+  public RuntimeAnimatorController[] enemyAnimators;
 
   List<int[]>waves = new List<int[]>();
 
@@ -55,7 +56,7 @@ public class EnemySpawnSystem : MonoBehaviour {
     }
     currentEnemies.Clear();
 
-    int spritesLength = enemySprites.Length;
+    int spritesLength = enemyAnimators.Length;
     int spriteIndex   = Random.Range(0, spritesLength);
 
     // Spawn for each entangled group
@@ -78,8 +79,9 @@ public class EnemySpawnSystem : MonoBehaviour {
         newEnemy.GetComponent<MemoryComponent>().firstActiveTick =
           timekeeper.getTick();
 
-        newEnemy.GetComponent<SpriteRenderer>().sprite =
-          enemySprites[spriteIndex];
+        newEnemy.transform.GetChild(0).gameObject.GetComponent<Animator>().
+        runtimeAnimatorController =
+          enemyAnimators[spriteIndex];
 
         EnemyObservingSystem observer =
           newEnemy.GetComponent<EnemyObservingSystem>();
