@@ -49,6 +49,7 @@ public class EnemyObservingSystem : MonoBehaviour {
       GetComponent<MovementSystem>().enabled = false;
       this.enabled                           = false;
 
+      GetComponent<AudioSource>().Play();
       GetComponent<AnimatorChildComponent>().animator.runtimeAnimatorController =
         disappearAnimation;
       spriteRenderer.sprite = disappearSprite;
