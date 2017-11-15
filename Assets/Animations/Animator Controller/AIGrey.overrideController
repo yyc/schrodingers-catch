@@ -8,9 +8,9 @@ AnimatorOverrideController:
   m_Name: AIGrey
   m_Controller: {fileID: 9100000, guid: a16e5b6337f98064cadd940f5ea580b6, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 1e469545b9f9a4645adb360e237c1b03, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 6909d7adfbda52b4fa2872f47bce1327, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: f41d3e32762a72043aff4be23d8f6374, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 34a49ecc49855814baa30d763181e0a2, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 7bd914adf380fab47bc85fb0735049f0, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 7bd914adf380fab47bc85fb0735049f0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1e469545b9f9a4645adb360e237c1b03, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1e469545b9f9a4645adb360e237c1b03, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f41d3e32762a72043aff4be23d8f6374, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f41d3e32762a72043aff4be23d8f6374, type: 2}
