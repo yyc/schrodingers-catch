@@ -54,7 +54,7 @@ public class EnemyObservingSystem : MonoBehaviour {
         disappearAnimation;
       spriteRenderer.sprite = disappearSprite;
 
-      chargeComponent.chargesLeft++;
+      chargeComponent.Increment();
     } else {
       spriteRenderer.color = new Color(1,
                                        1,

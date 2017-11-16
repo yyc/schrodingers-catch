@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 1020410446670712}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.000000023981556, z: 0.05}
-  m_LocalScale: {x: 0.33335036, y: 0.33335036, z: 0.30001917}
+  m_LocalScale: {x: 0.33335036, y: -0.3333504, z: 0.30001917}
   m_Children: []
   m_Father: {fileID: 4682030838807838}
   m_RootOrder: 7
@@ -371,7 +371,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0df83a285b1f7421b9e699dd9cb80ddf, type: 3}
   wallSprite: {fileID: 21300000, guid: cfdfad5c68bee4bf68dfe86e52932d4d, type: 3}
   pathSprite: {fileID: 21300000, guid: f9fc8b16dbcf14295b012f194f2ef6f7, type: 3}
-  portalSprite: {fileID: 21300000, guid: 54ca29e6c7d4443e5b3bb18a07782689, type: 3}
+  portalSprite: {fileID: 21300000, guid: 02024e35046c9964d8dddecf162c6f7d, type: 3}
   cornerSprites:
   - {fileID: 21300000, guid: 0b111dd239026447994e337e987280ea, type: 3}
   - {fileID: 21300000, guid: f994c603f880c478f8db4252e8685831, type: 3}
@@ -451,7 +451,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e4e4187c814f54a169dbd90c27cb9b03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9fc8b16dbcf14295b012f194f2ef6f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
