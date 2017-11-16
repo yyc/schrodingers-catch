@@ -33,7 +33,6 @@ public class MemorySystem : MonoBehaviour {
     if (tick == -100) {
       tick = Timekeeper.getInstance().getTick();
     }
-    Debug.Log(memComponent.memory);
     memComponent.hashtable[tick] = memComponent.memory;
   }
 }
