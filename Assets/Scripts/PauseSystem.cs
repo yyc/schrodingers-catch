@@ -7,9 +7,9 @@ public class PauseSystem : MonoBehaviour {
 
 	public Timekeeper timekeeper;
 	public PlayerControllerSystem playerControllerSystem;
-	public GameObject pausePanel;
 	public Button[] pauseButtons;
 	public Button[] resumeButtons;
+	int semaphore = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -21,18 +21,22 @@ public class PauseSystem : MonoBehaviour {
 		foreach(Button button in resumeButtons) {
 			button.onClick.AddListener(Resume);
 		}
+		semaphore = 0;
 	}
 	
 	void Pause() {
 		timekeeper.startRewind();
 		playerControllerSystem.underControl = false;
-		pausePanel.SetActive(true);
+		semaphore++;
 	}
 
 	void Resume() {
+		semaphore --;
+		if(semaphore > 0) {
+			return;
+		}
 		timekeeper.stopRewind();
 		playerControllerSystem.underControl = true;
-		pausePanel.SetActive(false);
 	}
 
 }
