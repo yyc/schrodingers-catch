@@ -74,6 +74,7 @@ public class EnemyControllerSystem : MonoBehaviour {
     int leastIndex        = 0;
     Tuple3I nextPosition  = position;
     int     leastDistance = 99999;
+    int chosenIndex = 0;
 
     for (int i = 0; i < 4; i++) {
       nextPosition = position + directions[i];
@@ -90,8 +91,23 @@ public class EnemyControllerSystem : MonoBehaviour {
       }
     }
 
-    nextPosition       = position + directions[leastIndex];
-    nextPosition.third = leastIndex;
+    chosenIndex = leastIndex;
+    for (int i = 0; i < 4; i++) {
+      nextPosition = position + directions[i];
+
+      if (!MapGenerator.isValidMove(position.first, position.second,
+                                    nextPosition.first, nextPosition.second)) {
+        continue;
+      }
+
+      if (i != leastIndex && Random.Range(0.0f, 8.0f) < 1.0f) {
+        chosenIndex = i;
+      }
+    }
+
+
+    nextPosition       = position + directions[chosenIndex];
+    nextPosition.third = chosenIndex;
     return nextPosition;
   }
 
