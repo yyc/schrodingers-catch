@@ -84,13 +84,6 @@ public class MapGenerator : MonoBehaviour {
 
     if (portalLocations.Count > 0) {
       TupleI charCoords = portalLocations[0];
-      character.transform.position = PositionFor(charCoords);
-
-      character.GetComponent<MemoryComponent> ().position = new Tuple3I(
-        charCoords.first,
-        charCoords.second,
-        0);
-
       GeneratePathfindingMap();
     }
 

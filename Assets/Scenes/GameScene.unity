@@ -4210,11 +4210,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4262987976106988, guid: ad654aa5ac29f498b90be6fbfa25db63, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.75
+      value: 6.29
       objectReference: {fileID: 0}
     - target: {fileID: 4262987976106988, guid: ad654aa5ac29f498b90be6fbfa25db63, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.9
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 4262987976106988, guid: ad654aa5ac29f498b90be6fbfa25db63, type: 2}
       propertyPath: m_LocalPosition.z
