@@ -49,6 +49,7 @@ public class EnemyControllerSystem : MonoBehaviour {
 
     // Add subsequent reposition memories
     while (MapGenerator.GetPathValueFor(position) != 1) {
+      moveTick += speedTicks;
       if ((moveTick - startTick) / speedTicks > 1000) { // more than 1000 steps
         Debug.Log("Path taking too long!");
         return;
@@ -58,7 +59,14 @@ public class EnemyControllerSystem : MonoBehaviour {
                             position);
       memComponent.hashtable[moveTick] = memory;
 
-      moveTick += speedTicks;
+    }
+
+    // Add animation for climbing the ladder
+    position.third = 1;
+    Tuple3I newPosition = position + new Tuple3I(1,0,0);
+    for(int i = 0; i < 16; i++) {
+      memory = new Memory(Memory.MemoryEvent.reposition, position, newPosition, i * 1.0f / 16);
+      memComponent.hashtable[moveTick + i] = memory; 
     }
   }
 

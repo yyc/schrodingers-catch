@@ -19,8 +19,6 @@ public class ChargeManager : MonoBehaviour {
 
   // Use this for initialization
   void Start() {
-    Debug.Log(transform.childCount);
-
     while (transform.childCount < numCharges) {
       Transform newObj = Instantiate(firstBar.transform);
       newObj.SetParent(transform);

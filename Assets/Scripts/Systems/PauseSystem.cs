@@ -24,13 +24,13 @@ public class PauseSystem : MonoBehaviour {
 		semaphore = 0;
 	}
 	
-	void Pause() {
+	public void Pause() {
 		timekeeper.startRewind();
 		playerControllerSystem.underControl = false;
 		semaphore++;
 	}
 
-	void Resume() {
+	public void Resume() {
 		semaphore --;
 		if(semaphore > 0) {
 			return;
