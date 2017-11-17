@@ -14,12 +14,16 @@ public class EnemyObservingSystem : MonoBehaviour {
   public Sprite disappearSprite;
   public RuntimeAnimatorController disappearAnimation;
 
+  public GameObject alertObj;
+  MemoryComponent memComponent;
+
   // Counts the number of observers and only updates the fraction when
   // Transitioning from unobserved
   protected int observerCount = 0;
 
   // Use this for initialization
   void Start()  {
+    memComponent = GetComponent<MemoryComponent>();
     foreach (Transform child in transform) {
       spriteRenderer = child.GetComponent<SpriteRenderer>();
     }
@@ -31,10 +35,15 @@ public class EnemyObservingSystem : MonoBehaviour {
       return;
     }
 
+    if(MapGenerator.GetPathValueFor(memComponent.position) <= 5 && MapGenerator.GetPathValueFor(memComponent.position) != 1){
+      alertObj.SetActive(true);
+    } else {
+      alertObj.SetActive(false);
+    }
+
     if (observed.first == observed.second) {
       spriteRenderer.color = new Color(1, 1, 1, 1.0f);
       int tick                     = Timekeeper.getInstance().getTick();
-      MemoryComponent memComponent = GetComponent<MemoryComponent>();
 
       if ((tick <= memComponent.firstActiveTick) ||
           (tick >= memComponent.lastActiveTick)) {
@@ -74,6 +83,7 @@ public class EnemyObservingSystem : MonoBehaviour {
       }
       observerCount++;
     } else if (other.gameObject.CompareTag("Portal")) {
+      alertObj.SetActive(false);
       Debug.Log("Game Over, man, Game Over");
       GameOverSystem.GameOver();
     }
