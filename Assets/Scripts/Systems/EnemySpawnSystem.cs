@@ -45,7 +45,8 @@ public class EnemySpawnSystem : MonoBehaviour {
 
   public void Spawn(int wave) {
     if(wave >= waves.Count) {
-      Spawn(new int[] {10});
+      int increment = (wave - waves.Count / 3);
+      Spawn(new int[] {10 + increment});
     } else {
       Spawn(waves[wave]);
     }
