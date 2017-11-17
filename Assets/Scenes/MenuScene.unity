@@ -145,7 +145,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 404, y: 287}
+  m_AnchoredPosition: {x: 366, y: 287}
   m_SizeDelta: {x: 202.4, y: 66.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &223336425
@@ -174,7 +174,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -452,7 +452,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -316, y: 287}
+  m_AnchoredPosition: {x: -389, y: 287}
   m_SizeDelta: {x: 187.9, y: 71.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468363276
@@ -481,7 +481,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 78
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -637,6 +637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionScene: InstructionsScene
+  minimumLoadingTime: 0.5
+  loadingText: {fileID: 223336425}
 --- !u!1 &556877272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,6 +1332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionScene: GameScene
+  minimumLoadingTime: 2
+  loadingText: {fileID: 468363276}
 --- !u!1 &1504749424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,7 +1517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 53, y: -285}
+  m_AnchoredPosition: {x: -12, y: -285}
   m_SizeDelta: {x: 204.9, y: 72.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671651708
@@ -1542,7 +1546,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1640,3 +1644,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionScene: CreditsScene
+  minimumLoadingTime: 0.5
+  loadingText: {fileID: 1671651708}
